@@ -1,7 +1,7 @@
 # TheGreatestBankingApp
 
 To get started run:
-    ```$npm install```
+    ```$npm install``` <br>
 To start the server use: 
     ```$npm run dev```
 
