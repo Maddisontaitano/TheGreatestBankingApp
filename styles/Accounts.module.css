@@ -19,6 +19,7 @@
     margin: 9rem;
     line-height: 2rem;
     text-align: center;
+    transition: .2s ease;
 }
 
 .card {
@@ -27,6 +28,7 @@
     height: 18rem;
     font-size: 2rem;
     margin: 2rem;
+    transition: 1s ease;
 }
 
 .names {
