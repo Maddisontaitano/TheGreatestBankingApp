@@ -1,11 +1,12 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-  <div>
-
-  <p>test</p>
-  </div>
+  return (
+    <div>
+      <Component {...pageProps} />
+      <p>test</p>
+    </div>
+  );
 }
 
-export default MyApp
+export default MyApp;
