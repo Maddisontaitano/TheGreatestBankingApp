@@ -1,0 +1,36 @@
+.nav {
+    height: 5rem;
+    padding: 10px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.nav ul {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    list-style: none;
+    width: 100%;
+}
+
+.nav ul li a {
+    margin: 5px 15px;
+}
+
+.nav img {
+    cursor: pointer;
+    height: 2rem;
+    width: 2rem;
+}
+
+.user {
+    margin-right: 4rem;
+    margin-left: auto;
+}
+
+.bank {
+    margin-right: 3rem;
+    cursor: default;
+}
