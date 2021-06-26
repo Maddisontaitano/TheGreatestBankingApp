@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/lib/*": ["lib/*"]
+    },
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/entry/[id].js", "pages/entry/edit/[id].js", "components/users/Users.js", "components/users/user/User.js", "components/UserEntryForm.js", "components/LoginForm.js", "components/Footer.js", "components/EntryForm.js", "components/entries/Entries.js", "components/entries/entry/Entry.js", "components/EditEntryForm.js", "components/Container.js", "components/ButtonLink.js", "components/Button.js", "components/powered-by-vercel/button.js", "pages/user.js", "pages/transactions.js", "pages/newUser.js", "pages/new.js", "pages/login.js", "pages/integrations.js", "pages/index.js", "pages/accounts.js", "pages/_app.j", "pages/reports.js", "components/accountCard.js", "components/Layout.js", "components/HeadComp.js"],
+  "exclude": ["node_modules"]
+}

@@ -1,17 +1,45 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Skeleton from 'react-loading-skeleton'
 
-export default function Home() {
+import { useState } from 'react'
+
+import Nav from '../components/Nav'
+import Container from '../components/Container'
+import Entries from '../components/entries/Entries'
+import Users from '../components/users/Users'
+
+import { useEntries, useUsers } from '@/lib/swr-hooks'
+
+export default function IndexPage() {
+  const { entries, isLoading } = useEntries()
+  const { users, isLoad } = useUsers()
+  // console.log(entries)
+  // console.log(users)
+
+  if (isLoading || isLoad) {
+    return (
+      <div>
+        <Container>
+          <Skeleton width={180} height={24} />
+          <Skeleton height={48} />
+          <div className="my-4" />
+          <Skeleton width={180} height={24} />
+          <Skeleton height={48} />
+          <div className="my-4" />
+          <Skeleton width={180} height={24} />
+          <Skeleton height={48} />
+        </Container>
+      </div>
+    )
+  }
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>The Greatest Banking App</title>
-        <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
-        <meta name="description" content="The Greatest Banking App to ever Exist" />
-        <link rel="icon" href="/favicon.png" />
-      </Head>
-
-      <h1>Hello World</h1>
+    <div>
+      <Container>
+        <Entries entries={entries} />
+      </Container>
+      <Container>
+        <Users users={users} />
+      </Container>
     </div>
   )
 }

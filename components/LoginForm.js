@@ -1,0 +1,72 @@
+import { useState } from 'react'
+import Router from 'next/router'
+
+import Button from '../components/Button'
+
+export default function EntryForm() {
+  const [email, setEmail] = useState('')
+  const [pass, setPass] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+  const [loginSucces, setloginSucces] = useState('')
+
+  async function submitHandler(e) {
+    setSubmitting(true)
+    e.preventDefault()
+    try {
+      const res = await fetch('/api/login-users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          pass
+        }),
+      })
+      setSubmitting(false)
+      const data = await res.json()
+      if (!res.ok) throw Error(data.message)
+      data.success ? setloginSucces("Succesfully Logged In") : setloginSucces("Wrong Username / Password"); //Setting a succes message is login was succesfull
+      console.log(data)
+      // console.log(json.results[0].pass);
+      // Router.push('/')
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
+
+  return (
+    <form onSubmit={submitHandler}>
+      <div className="my-4">
+        <label htmlFor="email">
+          <h3 className="font-bold">Email</h3>
+        </label>
+        <input
+          id="email"
+          className="shadow border rounded w-full"
+          type="text"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div><div className="my-4">
+        <label htmlFor="pass">
+          <h3 className="font-bold">Password</h3>
+        </label>
+        <input
+          id="pass"
+          className="shadow border rounded w-full"
+          type="text"
+          name="pass"
+          value={pass}
+          onChange={(e) => setPass(e.target.value)}
+        />
+      </div>
+      <Button disabled={submitting} type="submit">
+        {submitting ? 'logging ...' : 'Login'}
+      </Button>
+
+      <p>{loginSucces}</p>
+    </form>
+  )
+}
