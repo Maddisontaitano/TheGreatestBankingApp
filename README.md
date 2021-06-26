@@ -43,17 +43,7 @@ Set each variable on `.env.local`:
 - `MYSQL_USERNAME` - The name of the MySQL user with access to database.
 - `MYSQL_PASSWORD` - The passowrd of the MySQL user.
 
-### Step 3. Run migration script
-
-You'll need to run a migration to create the necessary table for the example.
-
-```bash
-npm run migrate
-# or
-yarn migrate
-```
-
-### Step 4. Run Next.js in development mode
+### Step 3. Run Next.js in development mode
 
 ```bash
 npm install
