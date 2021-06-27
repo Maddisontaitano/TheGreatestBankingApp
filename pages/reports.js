@@ -8,7 +8,6 @@ const reports = () => {
 
     
     const cycleChart = () => {
-        console.log('working')
         if(ChartType === Bar) {
             changeChartType(ChartType = Line)
         } else {
