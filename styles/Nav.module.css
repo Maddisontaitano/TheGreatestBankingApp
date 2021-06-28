@@ -46,4 +46,25 @@
     top: 3.5rem;
     z-index: 2;
     transition: 0.2s ease-in;
+    opacity: 0;
+    font-size: 0;
+}
+
+.connector {
+    position: absolute;
+    height: 2rem;
+    width: 2rem;
+}
+
+.dropdown ul {
+    flex-direction: column;
+    padding: 0;
+    padding-top: 1rem;
+}
+
+.dropdown ul li {
+    margin-left: 0;
+    margin-bottom: 1rem;
+    left: 0;
+    cursor: pointer;
 }
