@@ -35,9 +35,6 @@ export default function IndexPage() {
   return (
     <div>
       <Container>
-        <Entries entries={entries} />
-      </Container>
-      <Container>
         <Users users={users} />
       </Container>
     </div>

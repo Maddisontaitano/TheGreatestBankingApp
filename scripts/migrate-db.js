@@ -38,15 +38,22 @@ async function migrate() {
       content TEXT NOT NULL
     )
     `)
+    console.log("********")
+    console.log(await query(
+        `
+        SELECT *
+        FROM users
+        WHERE userId = 1
+        `
+      ))
     // Can run queries to test mySQL here
-    console.log('*******')
-    console.log(await query('SELECT * FROM users'))
-    console.log('*******')
-    console.log(await query('SELECT * FROM accounts'))
-    console.log('*******')
-    console.log(await query('SELECT * FROM transactions'))
-    console.log('*******')
-    console.log(await query('SELECT * FROM entries'))
+    // console.log('*******')
+    // console.log(await query('SELECT * FROM users'))
+    // console.log('*******')
+    // console.log(await query('SELECT * FROM accounts'))
+    // console.log('*******')
+    // console.log(await query('SELECT * FROM transactions'))
+    // console.log('*******')
   } catch (e) {
     console.log(e)
     console.error('could not run migration, double check your credentials.')
