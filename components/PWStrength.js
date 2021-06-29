@@ -6,6 +6,7 @@ class PWStrength extends Component {
 		this.state = {
 			password: "",
 			score: 0,
+			color: "red-600",
 			containsLowerCase: false,
 			containsUpperCase: false,
 			containsNumeral: false,
@@ -16,69 +17,80 @@ class PWStrength extends Component {
 
 	componentDidUpdate (prevProps, prevState) {
 		if (prevState.password !== this.state.password) {
-			this.calculateScore();
+			
+			clearTimeout(this.timer);
+			this.timer = setTimeout(() => {
+				this.calculateScore();
+			}, 500);
 		}
 	}
 
 	handlePW = (e) => {
-		this.setState({
+		const newState = {
 			password: e.target.value
-		});
+		};
 
-		console.log("hi");
+		newState.containsLowerCase = /[a-z]/.test(e.target.value) ? true : false;
+		newState.containsUpperCase = /[A-Z]/.test(e.target.value) ? true : false;
+		newState.containsNumeral = /[0-9]/.test(e.target.value) ? true : false;
+		newState.containsSpecialCharacter = /[!@#$%^&*)(+=._-`~[\]{};:'",<>/?]/.test(e.target.value) ? true : false;
+		
+		this.setState(newState);
 	}
 
 	calculateScore = () => {
-		const newState = {
-			score: this.state.score
+		let newScore = 0;
+		let newColor;
+
+		if (this.state.containsLowerCase) {
+			newScore += 1;
+		}
+		if (this.state.containsUpperCase) {
+			newScore += 1;
+		}
+		if (this.state.containsNumeral) {
+			newScore += 2;
+		}
+		if (this.state.containsSpecialCharacter) {
+			newScore += 2;
 		}
 
-		clearTimeout(this.timer);
-		this.timer = setTimeout(() => {
-			if (!this.state.containsLowerCase && /[a-z]/.test(this.state.password)) {
-				newState.containsLowerCase = true;
-				newState.score = newState.score + 2;
-			} else if (this.state.containsLowerCase && !/[a-z]/.test(this.state.password)) {
-				newState.containsLowerCase = false;
-				newState.score = newState.score - 2;
-			}
+		console.log(newScore);
 
-			if (!this.state.containsUpperCase && /[A-Z]/.test(this.state.password)) {
-				newState.containsUpperCase = true;
-				newState.score = newState.score + 2;
-			} else if (this.state.containsUpperCase && !/[A-Z]/.test(this.state.password)) {
-				newState.containsUpperCase = false;
-				newState.score = newState.score - 2;
-			}
+		switch (newScore) {
+			case 0:
+			case 1:
+			case 2:
+			case 3:
+				newColor = "red-600";
+				break;
+			case 4:
+			case 5:
+			case 6:
+			case 7:
+				newColor = "yellow-400";
+				break;
+			default:
+				newColor = "green-600";
+				break;
+		}
 
-			if (!this.state.containsNumeral && /[0-9]/.test(this.state.password)) {
-				newState.containsNumeral = true;
-				newState.score = newState.score + 2;
-			} else if (this.state.containsNumeral && !/[0-9]/.test(this.state.password)) {
-				newState.containsNumeral = false;
-				newState.score = newState.score - 2;
-			}
-
-			if (!this.state.containsSpecialCharacter && /[!@#$%^&*)(+=._-`~[\]{};:'",<>/?]/.test(this.state.password)) {
-				newState.containsSpecialCharacter = true;              //:;'"[{}\],<>/?`~
-				newState.score = newState.score + 2;
-			} else if (this.state.containsSpecialCharacter && !/[!@#$%^&*)(+=._-`~[\]{};:'",<>/?]/.test(this.state.password)) {
-				newState.containsSpecialCharacter = false;
-				newState.score = newState.score - 2;
-			}
-
-			this.setState(newState);
-		}, 600)
+		this.setState({
+			score: newScore,
+			color: newColor
+		});
 	}
 
 	render() {
 		return (
-			<div>
+			<div className="flex flex-row">
 				<form>
 					<label htmlFor="password">Password: </label>
-					<input type="password" id="password" name="password" minLength="6" maxLength="32" onChange={this.handlePW} />
+					<input className="bg-gray-300 rounded-sm" type="password" id="password" name="password" minLength="6" maxLength="32" onChange={this.handlePW} />
 				</form>
-				<h1>{this.state.score}/10</h1>
+				<article className="ml-2 w-40 rounded-sm border-solid border-black border-2">
+					<div className={`bg-${this.state.color} w-${this.state.score * 4} h-full`}></div>
+				</article>
 			</div>
 		);
 	}
