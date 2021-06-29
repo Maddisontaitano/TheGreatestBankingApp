@@ -34,6 +34,7 @@ class PWStrength extends Component {
 		newState.containsUpperCase = /[A-Z]/.test(e.target.value) ? true : false;
 		newState.containsNumeral = /[0-9]/.test(e.target.value) ? true : false;
 		newState.containsSpecialCharacter = /[!@#$%^&*)(+=._-`~[\]{};:'",<>/?]/.test(e.target.value) ? true : false;
+		newState.longerThanSixteen = e.target.value.length >= 16 ? true : false;
 		
 		this.setState(newState);
 	}
@@ -43,31 +44,27 @@ class PWStrength extends Component {
 		let newColor;
 
 		if (this.state.containsLowerCase) {
-			newScore += 1;
+			newScore++;
 		}
 		if (this.state.containsUpperCase) {
-			newScore += 1;
+			newScore++;
 		}
 		if (this.state.containsNumeral) {
-			newScore += 2;
+			newScore++;
 		}
 		if (this.state.containsSpecialCharacter) {
-			newScore += 2;
+			newScore++;
 		}
-
-		console.log(newScore);
-
+		if (this.state.password.length >= 16) {
+			newScore++;
+		}
 		switch (newScore) {
 			case 0:
 			case 1:
-			case 2:
-			case 3:
 				newColor = "red-600";
 				break;
-			case 4:
-			case 5:
-			case 6:
-			case 7:
+			case 2:
+			case 3:
 				newColor = "yellow-400";
 				break;
 			default:
@@ -86,10 +83,10 @@ class PWStrength extends Component {
 			<div className="flex flex-row">
 				<form>
 					<label htmlFor="password">Password: </label>
-					<input className="bg-gray-300 rounded-sm" type="password" id="password" name="password" minLength="6" maxLength="32" onChange={this.handlePW} />
+					<input className="bg-gray-300 rounded-sm mr-2" type="password" id="password" name="password" minLength="6" maxLength="32" onChange={this.handlePW} />
 				</form>
-				<article className="ml-2 w-40 rounded-sm border-solid border-black border-2">
-					<div className={`bg-${this.state.color} w-${this.state.score * 4} h-full`}></div>
+				<article className="w-40 rounded-sm border-solid border-black border-2">
+					<div className={`bg-${this.state.color} w-${this.state.score > 0 ? `${this.state.score}/5` : '0'} h-full`}></div>
 				</article>
 			</div>
 		);
