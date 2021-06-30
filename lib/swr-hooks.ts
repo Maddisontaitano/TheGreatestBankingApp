@@ -28,7 +28,22 @@ export function useAccounts(id: string) {
   }
 }
 
-export function useTransactions(id: string) {
+// Get's all users transactions
+export function useUserTransactions(id: string) {
+  const { data, error } = useSWR(`/api/get-user-transactions?id=${id}`, fetcher)
+  console.log("**** Transaction Data ****")
+  console.log(data)
+  console.log("**** Transaction Data ****")
+
+  return {
+    accounts: data,
+    isLoad: !error && !data,
+    isError: error,
+  }
+}
+
+// Get's transactions from account
+export function useAccountTransactions(id: string) {
   const { data, error } = useSWR(`/api/get-account-transactions?id=${id}`, fetcher)
   console.log(data) 
 
@@ -50,6 +65,16 @@ export function useUser(id: string) {
   }
 }
 
+export function useAccount(id: string) {
+  const { data, error } = useSWR(`/api/get-account?id=${id}`, fetcher) // this api still needs to be setup
+  console.log("**** User Data ****")
+  console.log(data)
+  console.log("**** User Data ****")
+  return {
+    user: data,
+    isError: error
+  }
+}
 
 export function useEntries() {
   const { data, error } = useSWR(`/api/get-entries`, fetcher)

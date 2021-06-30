@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { mutate } from 'swr'
-import { useTransactions} from '@../../lib/swr-hooks'
+import { useAccountTransactions} from '@../../lib/swr-hooks'
 
 import Container from '../Container'
 import Transactions from '../transactions/Transactions'
@@ -11,7 +11,7 @@ import Button from '../Button'
 function Account({ id, type, userId, balance, username }) {
   const [deleting, setDeleting] = useState(false)
   console.log(id)
-  const {transactions, isLoad} = useTransactions(id)
+  const {transactions, isLoad} = useAccountTransactions(id)
 
   async function deleteEntry() {
     setDeleting(true)
