@@ -1,0 +1,48 @@
+.main {
+    position: absolute;
+    min-height: 78%;
+    height: auto;
+    width: 70%;
+    background-color: white ;
+    top: 8rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.add {
+    cursor: pointer;
+    border: 2px solid black;
+    width: 3rem;
+    height: 3rem;
+    font-size: 2rem;
+    margin: 9rem;
+    line-height: 2rem;
+    text-align: center;
+    transition: .2s ease;
+}
+
+.card {
+    border: 2px solid black;
+    width: 18rem;
+    height: 18rem;
+    font-size: 2rem;
+    margin: 2rem;
+    transition: 0.1s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px rgb(179, 179, 179);
+}
+
+.names {
+    margin: 1rem;
+    text-align: center;
+}
+
+.cards {
+    font-size: 1.25rem;
+    margin: 1rem;
+    text-align: center;
+}
