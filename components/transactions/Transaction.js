@@ -5,7 +5,7 @@ import { mutate } from 'swr'
 import ButtonLink from '../ButtonLink'
 import Button from '../Button'
 
-function User({ id, fname, lname, email, pass }) {
+function Transaction({ id, transactionDate, transactionTime, description, cost }) {
   const [deleting, setDeleting] = useState(false)
 
   async function deleteEntry() {
@@ -13,18 +13,23 @@ function User({ id, fname, lname, email, pass }) {
     let res = await fetch(`/api/delete-entry?id=${id}`, { method: 'DELETE' }) // fix api point
     let json = await res.json()
     if (!res.ok) throw Error(json.message)
-    mutate('/api/get-entries')
+    mutate('/api/get-users')
     setDeleting(false)
   }
   return (
     <div>
       <div className="flex items-center">
         <Link href={`/user/${id}`}> 
-          <a className="font-bold py-2">{fname + ' ' + lname + " " + email}</a>
-        </Link>
+          <a className="font-bold py-2">
+            <h1>{description}</h1>
+            <h2>{cost}</h2>
+            <p>Date: {`${transactionDate} ${transactionTime}`}</p>
+          </a>
+        </Link> 
+        <p>{id}</p>
         <div className="flex ml-4">
           <ButtonLink
-            href={`/entry/edit/${id}?title=${fname}&content=${fname}`} // fix api point
+            // href={`/entry/edit/${id}?=${fname}&content=${fname}`} // fix api point
             className="h-5 py-0 mx-1"
           >
             Edit
@@ -42,4 +47,4 @@ function User({ id, fname, lname, email, pass }) {
   )
 }
 
-export default User
+export default Transaction
