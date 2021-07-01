@@ -33,8 +33,9 @@ export default function EntryForm() {
       })
       setSubmitting(false)
       const json = await res.json()
-      if (!res.ok) throw Error(json.message)
-      Router.push('/')
+      if (!res.ok) throw Error(json.message);
+      console.log(json)
+      Router.push('/login')
     } catch (e) {
       throw Error(e.message)
     }

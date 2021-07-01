@@ -41,7 +41,7 @@ const Nav = () => {
     const logUserOut = () => {
         if (loggedin) {
             document.cookie = 'user=; Max-Age=0; path=/;';
-            alert('User Logged Out');
+            // alert('User Logged Out');
             location.reload()
          } else {
             return;

@@ -9,12 +9,13 @@ const handler: NextApiHandler = async (req, res) => {
     if (!email || !pass) {
       return res.status(400).json({ message: '`All fields are required' })
     }
-
     const results = await query(
       `
-      SELECT pass FROM users WHERE email = '${email}'
+      SELECT * FROM users WHERE email = '${email}'
       `
     )
+
+    if (results[0]) {
       let userId;
     if (bcrypt.compareSync(pass, results[0].pass)) {
       userId = await query(
@@ -22,8 +23,13 @@ const handler: NextApiHandler = async (req, res) => {
         SELECT userId FROM users WHERE email = '${email}'
         `
       )
+      return res.json({success: bcrypt.compareSync(pass, results[0].pass), userId: userId[0].userId});
+    } else {
+      return res.json({success: false});
     }
-    return res.json({success: bcrypt.compareSync(pass, results[0].pass), userId: userId[0].userId});
+    } else {
+      return res.json({success: false});
+    }
     
 
     
