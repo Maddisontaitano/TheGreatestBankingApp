@@ -1,6 +1,7 @@
 import { NextApiHandler } from 'next'
 import { query } from '../../lib/db'
 var bcrypt = require('bcryptjs');
+import path from 'path';
 const handler: NextApiHandler = async (req, res) => {
   const { email, pass } = req.body;
 //   return res.json({email: email})
@@ -14,7 +15,16 @@ const handler: NextApiHandler = async (req, res) => {
       SELECT pass FROM users WHERE email = '${email}'
       `
     )
-    return res.json({success: bcrypt.compareSync(pass, results[0].pass)});
+      let userId;
+    if (bcrypt.compareSync(pass, results[0].pass)) {
+      userId = await query(
+        `
+        SELECT userId FROM users WHERE email = '${email}'
+        `
+      )
+    }
+    return res.json({success: bcrypt.compareSync(pass, results[0].pass), userId: userId[0].userId});
+    
 
     
 
