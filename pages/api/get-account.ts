@@ -10,14 +10,14 @@ const handler: NextApiHandler = async (req, res) => {
     const results = await query(
         `
         SELECT *
-        FROM users
-        WHERE userId = ?
+        FROM accounts
+        WHERE accountId = ?
         `,
         id
     )
-    console.log("*** get user results ***")
+    console.log("*** get account results ***")
     console.log(results)
-    console.log("*** get user results ***")
+    console.log("*** get account results ***")
     return res.json(results[0])
     } catch (e) {
     res.status(500).json({ message: e.message })

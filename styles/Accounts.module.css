@@ -28,7 +28,12 @@
     height: 18rem;
     font-size: 2rem;
     margin: 2rem;
-    transition: 1s ease;
+    transition: 0.1s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px rgb(179, 179, 179);
 }
 
 .names {

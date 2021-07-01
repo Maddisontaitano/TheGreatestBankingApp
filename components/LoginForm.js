@@ -26,7 +26,14 @@ export default function EntryForm() {
       setSubmitting(false)
       const data = await res.json()
       if (!res.ok) throw Error(data.message)
-      data.success ? setloginSucces("Succesfully Logged In") : setloginSucces("Wrong Username / Password"); //Setting a succes message is login was succesfull
+
+      if (data.success) {
+        setloginSucces("Succesfully Logged In")//Setting a succes message is login was succesfull
+        document.cookie = `user=${data.userId}; expires=Monday, 05 Jul 2021 23:00:00 UTC; path=/;`;
+        Router.push('/')
+      } else {
+        setloginSucces("Wrong Username / Password");//Setting a succes message is login was succesfull
+      }
       console.log(data)
       // console.log(json.results[0].pass);
       // Router.push('/')
