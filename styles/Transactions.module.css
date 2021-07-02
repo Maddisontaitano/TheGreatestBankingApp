@@ -1,0 +1,44 @@
+.container {
+    position: absolute;
+    min-height: 78%;
+    height: auto;
+    width: 70%;
+    background-color: white ;
+    top: 8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+}
+
+.bottom {
+    background-color: green;
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+}
+
+.description {
+    border: 2px solid black;
+    width: 700px;
+}
+
+.amount {
+    border: 2px solid black;
+    width: 100px;
+}
+
+.descContainer{
+    border: 2px solid black;
+    width: 700px;
+}
+
+.amountContainer{
+    border: 2px solid black;
+    width: 100px;
+}
