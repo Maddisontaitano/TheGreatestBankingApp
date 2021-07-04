@@ -4,7 +4,7 @@ class PWStrength extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			password: "",
+			// password: "",
 			score: 0,
 			color: "red-600",
 			containsLowerCase: false,
@@ -16,7 +16,7 @@ class PWStrength extends Component {
 	}
 
 	componentDidUpdate (prevProps, prevState) {
-		if (prevState.password !== this.state.password) {
+		if (prevProps.pass !== this.props.pass) {
 			
 			clearTimeout(this.timer);
 			this.timer = setTimeout(() => {
@@ -27,7 +27,7 @@ class PWStrength extends Component {
 
 	handlePW = (e) => {
 		const newState = {
-			password: e.target.value
+		// 	password: e.target.value
 		};
 
 		newState.containsLowerCase = /[a-z]/.test(e.target.value) ? true : false;
@@ -36,6 +36,7 @@ class PWStrength extends Component {
 		newState.containsSpecialCharacter = /[!@#$%^&*)(+=._-`~[\]{};:'",<>/?]/.test(e.target.value) ? true : false;
 		newState.longerThanSixteen = e.target.value.length >= 16 ? true : false;
 		
+        this.props.setPass(e.target.value);
 		this.setState(newState);
 	}
 
@@ -55,7 +56,7 @@ class PWStrength extends Component {
 		if (this.state.containsSpecialCharacter) {
 			newScore++;
 		}
-		if (this.state.password.length >= 16) {
+		if (this.props.pass.length >= 16) {
 			newScore++;
 		}
 		switch (newScore) {
@@ -80,13 +81,15 @@ class PWStrength extends Component {
 
 	render() {
 		return (
-			<div className="flex flex-row">
-				<form>
-					<label htmlFor="password">Password: </label>
-					<input className="bg-gray-300 rounded-sm mr-2" type="password" id="password" name="password" minLength="6" maxLength="32" onChange={this.handlePW} />
-				</form>
-				<article className="w-40 rounded-sm border-solid border-black border-2">
-					<div className={`bg-${this.state.color} w-${this.state.score > 0 ? `${this.state.score}/5` : '0'} h-full`}></div>
+			<div className="my-4">
+				{/* <article> */}
+				<label htmlFor="password">
+                    <h3 className="font-bold">Password</h3>
+                </label>
+				<input className="shadow border rounded w-full" type="password" id="pass" name="password" minLength="6" maxLength="32" onChange={this.handlePW} />
+				{/* </article> */}
+				<article className="w-40 shadow border rounded h-8 mt-4">
+					<div className={`bg-${this.state.color} w-${this.state.score > 0 ? `${this.state.score}/5` : '0'} h-8 rounded`}></div>
 				</article>
 			</div>
 		);
