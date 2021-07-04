@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Router from 'next/router'
 import Button from '../components/Button'
+import PWStrength from '../components/PWStrength'
 
 export default function EntryForm() {
   var bcrypt = require('bcryptjs');
@@ -81,7 +82,9 @@ export default function EntryForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-      </div><div className="my-4">
+      </div>
+      <PWStrength pass={pass} setPass={setPass}></PWStrength>
+      {/* <div className="my-4">
         <label htmlFor="pass">
           <h3 className="font-bold">Password</h3>
         </label>
@@ -93,7 +96,7 @@ export default function EntryForm() {
           value={pass}
           onChange={(e) => setPass(e.target.value)}
         />
-      </div>
+      </div> */}
       <Button disabled={submitting} type="submit">
         {submitting ? 'Creating ...' : 'Create'}
       </Button>
