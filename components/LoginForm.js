@@ -26,10 +26,15 @@ export default function EntryForm() {
       setSubmitting(false)
       const data = await res.json()
       if (!res.ok) throw Error(data.message)
+      
+      // SETTING THE EXPIRY DATE OF THE COOKIE
+      const timestamp = new Date().getTime(); // current time
+      const expiryDate = timestamp + (60 * 60 * 24 * 1000 * 7)
+      // SETTING THE EXPIRY DATE OF THE COOKIE
 
       if (data.success) {
         setloginSucces("Succesfully Logged In")//Setting a succes message is login was succesfull
-        document.cookie = `user=${data.userId}; expires=Monday, 05 Jul 2021 23:00:00 UTC; path=/;`;
+        document.cookie = `user=${data.userId}; ${expiryDate}; path=/;`;
         Router.push('/')
       } else {
         setloginSucces("Wrong Username / Password");//Setting a succes message is login was succesfull
