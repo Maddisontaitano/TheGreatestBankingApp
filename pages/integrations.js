@@ -3,7 +3,7 @@ import React from "react";
 const integrations = () => {
   return (
     <div>
-      <p>hi</p>
+      <p>Test</p>
     </div>
   );
 };

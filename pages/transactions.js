@@ -12,6 +12,7 @@ const transactions = () => {
       <h1>Transactions</h1>
       <div className={transactionsStyles.top}>
         <h4 className={transactionsStyles.descContainer}>Description</h4>
+        <div className={transactionsStyles.line}></div>
         <h4 className={transactionsStyles.amountContainer}>Amount</h4>
       </div>
       <div>
