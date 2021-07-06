@@ -32,21 +32,18 @@ async function query(q) {
 async function migrate() {
   try {
     await query(`
-    CREATE TABLE IF NOT EXISTS entries (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      title TEXT NOT NULL,
-      content TEXT NOT NULL
-    )
+    ALTER TABLE transactions
+      ADD FOREIGN KEY (userId) REFERENCES users(userId)
     `)
     // Can run queries to test mySQL here
-    console.log('*******')
-    console.log(await query('SELECT * FROM users'))
-    console.log('*******')
-    console.log(await query('SELECT * FROM accounts'))
-    console.log('*******')
+    // console.log('*******')
+    // console.log(await query('SELECT * FROM users'))
+    // console.log('*******')
+    // console.log(await query('SELECT * FROM accounts'))
+    // console.log('*******')
     console.log(await query('SELECT * FROM transactions'))
-    console.log('*******')
-    console.log(await query('SELECT * FROM entries'))
+    // console.log('*******')
+    // console.log(await query('SELECT * FROM entries'))
   } catch (e) {
     console.log(e)
     console.error('could not run migration, double check your credentials.')

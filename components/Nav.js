@@ -1,8 +1,13 @@
 import navStyles from '../styles/Nav.module.css'
 import Link from 'next/link'
-import { useState, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { useIsLoggedIn } from '@/lib/swr-hooks'
 
 const Nav = () => {
+    const {loggedin, userId} = useIsLoggedIn()
+    useEffect(() => {
+        console.log(loggedin)
+    }, [])
 
     const [dropdownVisibility, changeDropdownVisibility] = useState('hidden')
     const dropdown = useRef(null)
@@ -33,6 +38,16 @@ const Nav = () => {
         dropdown.current.style.fontSize = '0px'
     }
 
+    const logUserOut = () => {
+        if (loggedin) {
+            document.cookie = 'user=; Max-Age=0; path=/;';
+            // alert('User Logged Out');
+            location.reload()
+         } else {
+            return;
+         }
+    }
+
     return (
         <div className={navStyles.nav}>
             <ul>
@@ -43,12 +58,13 @@ const Nav = () => {
                 <li><Link href='/integrations'>Integrations</Link></li>
                 <li><Link href='/accounts'>Accounts</Link></li>
                 <li className={navStyles.user} onMouseEnter={showDropdown} onMouseLeave={hideDropdown} >
-                    <Link href='/user'><img src='https://i.ibb.co/LZdfPsd/account.png' alt='user'></img></Link>
+                    <Link href='#'><img src='https://i.ibb.co/LZdfPsd/account.png' alt='user'></img></Link>
                     <div className={navStyles.connector}></div>
                     <div className={navStyles.dropdown} ref={dropdown} style={{visibility: dropdownVisibility}} >
                         <ul>
-                            <li>Login</li>
-                            <li>Register</li>
+                            {!loggedin ? (<li><Link href='/login'>Login</Link></li>) : <></>}
+                            {!loggedin ? (<li><Link href='/signup'>Register</Link></li>) : <></>}
+                            {loggedin ? (<li onClick={() => logUserOut()} style={{cursor: 'pointer'}}>Logout</li>) : <></>}
                         </ul>
                     </div>
                 </li>

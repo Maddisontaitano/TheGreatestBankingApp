@@ -6,7 +6,7 @@ function fetcher(url: string) {
 
 export function useUsers() {
   const { data, error } = useSWR('/api/get-users', fetcher)
-  // console.log(data)
+  console.log(data)
 
   return {
     users: data,
@@ -15,14 +15,70 @@ export function useUsers() {
   }
 }
 
-export function useUser(id: string) {
-  return useSWR(`/api/get-user?id=${id}`, fetcher) // this api still needs to be setup
+export function useAccounts(id: string) {
+  const { data, error } = useSWR(`/api/get-user-accounts?id=${id}`, fetcher)
+  console.log("**** Account Data ****")
+  console.log(data)
+  console.log("**** Account Data ****")
+
+  return {
+    accounts: data,
+    isLoad: !error && !data,
+    isError: error,
+  }
 }
 
+// Get's all users transactions
+export function useUserTransactions(id: string) {
+  const { data, error } = useSWR(`/api/get-user-transactions?id=${id}`, fetcher)
+  console.log("**** Transaction Data ****")
+  console.log(data)
+  console.log("**** Transaction Data ****")
+
+  return {
+    accounts: data,
+    isLoad: !error && !data,
+    isError: error,
+  }
+}
+
+// Get's transactions from account
+export function useAccountTransactions(id: string) {
+  const { data, error } = useSWR(`/api/get-account-transactions?id=${id}`, fetcher)
+  console.log(data) 
+
+  return {
+    transactions: data,
+    isLoad: !error && !data,
+    isError: error,
+  }
+}
+
+export function useUser(id: string) {
+  const { data, error } = useSWR(`/api/get-user?id=${id}`, fetcher) // this api still needs to be setup
+  console.log("**** User Data ****")
+  console.log(data)
+  console.log("**** User Data ****")
+  return {
+    user: data,
+    isError: error
+  }
+}
+
+export function useAccount(id: string) {
+  const { data, error } = useSWR(`/api/get-account?id=${id}`, fetcher) // this api still needs to be setup
+  console.log("**** User Data ****")
+  console.log(data)
+  console.log("**** User Data ****")
+  return {
+    user: data,
+    isError: error
+  }
+}
 
 export function useEntries() {
   const { data, error } = useSWR(`/api/get-entries`, fetcher)
-  // console.log(data)
+  console.log(data)
 
   return {
     entries: data,
@@ -31,6 +87,32 @@ export function useEntries() {
   }
 }
 
+export function useIsLoggedIn() {
+  if (typeof window !== 'undefined') {
+    if (document.cookie && document.cookie.split('; ').find(row => row.startsWith('user='))) {
+      const UserCookie = document.cookie.split('; ').find(row => row.startsWith('user=')).split('=')[1];
+      if (UserCookie !== '') {
+        return {
+          loggedin: true,
+          userId: UserCookie
+        }
+     }
+   } else {
+    return {
+      loggedin: false,
+      userId: null
+    }
+   }
+  } else {
+    return {
+      loggedin: false,
+      userId: null
+    }
+  }
+  
+
+//  return true;
+}
 export function useEntry(id: string) {
   return useSWR(`/api/get-entry?id=${id}`, fetcher)
 }
