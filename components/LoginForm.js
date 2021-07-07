@@ -26,7 +26,19 @@ export default function EntryForm() {
       setSubmitting(false)
       const data = await res.json()
       if (!res.ok) throw Error(data.message)
-      data.success ? setloginSucces("Succesfully Logged In") : setloginSucces("Wrong Username / Password"); //Setting a succes message is login was succesfull
+      
+      // SETTING THE EXPIRY DATE OF THE COOKIE
+      const timestamp = new Date().getTime(); // current time
+      const expiryDate = timestamp + (60 * 60 * 24 * 1000 * 7)
+      // SETTING THE EXPIRY DATE OF THE COOKIE
+
+      if (data.success) {
+        setloginSucces("Succesfully Logged In")//Setting a succes message is login was succesfull
+        document.cookie = `user=${data.userId}; ${expiryDate}; path=/;`;
+        Router.push('/')
+      } else {
+        setloginSucces("Wrong Username / Password");//Setting a succes message is login was succesfull
+      }
       console.log(data)
       // console.log(json.results[0].pass);
       // Router.push('/')
