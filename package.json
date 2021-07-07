@@ -23,9 +23,11 @@
     "passport": "^0.4.1",
     "react": "^17.0.2",
     "react-chartjs-2": "^3.0.3",
+    "react-cookie": "^4.0.3",
     "react-dom": "^17.0.2",
     "react-loading-skeleton": "^2.1.1",
     "serverless-mysql": "^1.5.4",
+    "stripe": "^8.160.0",
     "swr": "^0.3.9"
   },
   "devDependencies": {

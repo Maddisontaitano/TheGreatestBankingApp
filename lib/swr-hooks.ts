@@ -87,6 +87,32 @@ export function useEntries() {
   }
 }
 
+export function useIsLoggedIn() {
+  if (typeof window !== 'undefined') {
+    if (document.cookie && document.cookie.split('; ').find(row => row.startsWith('user='))) {
+      const UserCookie = document.cookie.split('; ').find(row => row.startsWith('user=')).split('=')[1];
+      if (UserCookie !== '') {
+        return {
+          loggedin: true,
+          userId: UserCookie
+        }
+     }
+   } else {
+    return {
+      loggedin: false,
+      userId: null
+    }
+   }
+  } else {
+    return {
+      loggedin: false,
+      userId: null
+    }
+  }
+  
+
+//  return true;
+}
 export function useEntry(id: string) {
   return useSWR(`/api/get-entry?id=${id}`, fetcher)
 }

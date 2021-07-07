@@ -13,6 +13,16 @@ const handler: NextApiHandler = async (req, res) => {
         .json({ message: '`All fields are required' })
     }
 
+    const EmailExists = await query(
+      `
+      SELECT * FROM users WHERE email = '${email}'
+      `
+    )
+
+    if (EmailExists[0]) {
+      return res.json({message: "User already exists"})
+    }
+
     const results = await query(
       `
       INSERT INTO users (fname, lname, email, pass)
