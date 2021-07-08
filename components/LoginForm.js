@@ -26,6 +26,11 @@ export default function EntryForm() {
       setSubmitting(false)
       const data = await res.json()
       if (!res.ok) throw Error(data.message)
+      
+      // SETTING THE EXPIRY DATE OF THE COOKIE
+      const timestamp = new Date().getTime(); // current time
+      const expiryDate = timestamp + (60 * 60 * 24 * 1000 * 7)
+      // SETTING THE EXPIRY DATE OF THE COOKIE
 
       // SETTING THE EXPIRY DATE OF THE COOKIE
       const timestamp = new Date().getTime(); // current time

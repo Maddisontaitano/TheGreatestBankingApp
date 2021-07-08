@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const integrations = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+  return (
+    <div>
+      <p>Test</p>
+    </div>
+  );
+};
 
-export default integrations
+export default integrations;
