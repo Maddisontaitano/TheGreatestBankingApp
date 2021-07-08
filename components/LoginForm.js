@@ -32,6 +32,11 @@ export default function EntryForm() {
       const expiryDate = timestamp + (60 * 60 * 24 * 1000 * 7)
       // SETTING THE EXPIRY DATE OF THE COOKIE
 
+      // SETTING THE EXPIRY DATE OF THE COOKIE
+      const timestamp = new Date().getTime(); // current time
+      const expiryDate = timestamp + (60 * 60 * 24 * 1000 * 7)
+      // SETTING THE EXPIRY DATE OF THE COOKIE
+
       if (data.success) {
         setloginSucces("Succesfully Logged In")//Setting a succes message is login was succesfull
         document.cookie = `user=${data.userId}; ${expiryDate}; path=/;`;

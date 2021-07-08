@@ -1,11 +1,11 @@
 import React from 'react'
 
-const [id] = () => {
+const stripe = () => {
     return (
         <div>
-            
+            <p>Stripe</p>
         </div>
     )
 }
 
-export default [id]
+export default stripe

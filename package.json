@@ -21,6 +21,7 @@
     "mysql": "^2.18.1",
     "next": "latest",
     "passport": "^0.4.1",
+    "plaid": "^8.5.2",
     "react": "^17.0.2",
     "react-chartjs-2": "^3.0.3",
     "react-cookie": "^4.0.3",

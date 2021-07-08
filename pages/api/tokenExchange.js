@@ -1,13 +1,13 @@
 const plaid = require('plaid');
 const plaidClient = new plaid.Client({
-    clientID: '',
-    secret: '',
+    clientID: '60c9d85df827550010b03a3b',
+    secret: '2100b4f5885c7916e922febc522d7e',
     env: plaid.environments.sandbox,
 });
-
-export default (req, res) => {
+const util = require('util');
+export default async (req, res) => {
     
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    // res.setHeader('Access-Control-Allow-Origin', '*');
     
     const {publicToken} = req.body;
 
@@ -32,5 +32,11 @@ export default (req, res) => {
     console.log('Balance Endpoint');
     console.log(util.inspect(balanceResponse, false, null, true));
 
-    res.sendStatus(200);
+    const transactionsResponse = await plaidClient.getTransactions(accessToken, '2020-01-01', '2021-01-01', {});
+    console.log('-------------------');
+    console.log('Transactions Endpoint');
+    console.log(util.inspect(transactionsResponse, false, null, true));
+
+    res.json({authResponse, identityResponse, balanceResponse, transactionsResponse});
+    // res.status(200).end();
   }
