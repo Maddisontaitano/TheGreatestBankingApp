@@ -1,7 +1,7 @@
 const plaid = require('plaid');
 const plaidClient = new plaid.Client({
-    clientID: '60c9d85df827550010b03a3b',
-    secret: '2100b4f5885c7916e922febc522d7e',
+    clientID: '',
+    secret: '',
     env: plaid.environments.sandbox,
 });
 const util = require('util');
