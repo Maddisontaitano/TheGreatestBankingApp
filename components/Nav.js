@@ -51,14 +51,16 @@ const Nav = () => {
     return (
         <div className={navStyles.nav}>
             <ul>
-                <li className={navStyles.bank}><img src='https://i.ibb.co/xszpynb/favicon.png' alt='bank'></img></li>
+                {/* <img src='https://i.ibb.co/xszpynb/favicon.png' alt='bank'></img> */}
+                {/* <img src='https://i.ibb.co/LZdfPsd/account.png' alt='user'></img> */}
+                <li className={navStyles.title}><h2>Ark</h2></li>
                 <li><Link href='/'>Home</Link></li>
                 <li><Link href='/transactions'>Transactions</Link></li>
                 <li><Link href='/reports'>Reports</Link></li>
                 <li><Link href='/integrations'>Integrations</Link></li>
                 <li><Link href='/accounts'>Accounts</Link></li>
                 <li className={navStyles.user} onMouseEnter={showDropdown} onMouseLeave={hideDropdown} >
-                    <Link href='#'><img src='https://i.ibb.co/LZdfPsd/account.png' alt='user'></img></Link>
+                    <Link href='#' className={navStyles.signIn}>Sign in ></Link>
                     <div className={navStyles.connector}></div>
                     <div className={navStyles.dropdown} ref={dropdown} style={{visibility: dropdownVisibility}} >
                         <ul>

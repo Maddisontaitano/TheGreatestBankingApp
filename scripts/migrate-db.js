@@ -31,17 +31,17 @@ async function query(q) {
 // Create "entries" table if doesn't exist
 async function migrate() {
   try {
-    await query(`
-    ALTER TABLE transactions
-      ADD FOREIGN KEY (userId) REFERENCES users(userId)
-    `)
+    // await query(`
+    // ALTER TABLE transactions
+    //   ADD FOREIGN KEY (userId) REFERENCES users(userId)
+    // `)
     // Can run queries to test mySQL here
     // console.log('*******')
-    // console.log(await query('SELECT * FROM users'))
+    console.log(await query('SELECT * FROM users'))
     // console.log('*******')
     // console.log(await query('SELECT * FROM accounts'))
     // console.log('*******')
-    console.log(await query('SELECT * FROM transactions'))
+    // console.log(await query('SELECT * FROM transactions'))
     // console.log('*******')
     // console.log(await query('SELECT * FROM entries'))
   } catch (e) {

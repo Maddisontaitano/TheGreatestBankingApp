@@ -8,6 +8,9 @@ module.exports = {
     extend: {
       colors: {
         'accent-1': '#333',
+        weak: '#FF4A4A',
+        medium: '#FFDA4A',
+        strong: '#4AFF5F'
       },
     },
   },

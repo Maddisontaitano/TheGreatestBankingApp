@@ -1,7 +1,7 @@
 .nav {
     height: 5rem;
-    padding: 10px;
-    background-color: white;
+    padding: 10px 245px;
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -15,9 +15,20 @@
     width: 100%;
 }
 
-.nav ul li a {
+.nav ul li {
+    color: #32325d;
+
     margin: 5px 15px;
+    font-weight: 500;
 }
+
+.nav ul li:first-child {
+    margin-right: auto;
+}
+
+.nav ul li:last-child {
+    margin-left: auto;
+} 
 
 .nav img {
     cursor: pointer;
@@ -26,13 +37,24 @@
 }
 
 .user {
-    margin-right: 4rem;
+    /* margin-right: 4rem; */
     margin-left: auto;
 }
 
+.signIn {
+    margin: 0;
+    /* background-color: ; */
+}
+
 .bank {
-    margin-right: 3rem;
+    margin-right: auto;
     cursor: default;
+}
+
+.title {
+    margin-right: auto;
+    font-weight: 800;
+    font-size: 20px;
 }
 
 .dropdown {
