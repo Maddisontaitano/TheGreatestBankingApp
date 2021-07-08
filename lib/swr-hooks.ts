@@ -54,6 +54,16 @@ export function useAccountTransactions(id: string) {
   }
 }
 
+// export function useForgotPassword(email: string) {
+//   const { data, error } = useSWR(`/api/forgot-password?email=${email}`, fetcher);
+
+//   console.log(data)
+
+//   return {
+//     data
+//   }
+// }
+
 export function useUser(id: string) {
   const { data, error } = useSWR(`/api/get-user?id=${id}`, fetcher) // this api still needs to be setup
   console.log("**** User Data ****")

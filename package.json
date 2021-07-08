@@ -8,6 +8,7 @@
     "migrate": "node scripts/migrate-db.js"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.4.5",
     "bad-words": "^3.0.4",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
@@ -19,6 +20,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "mysql": "^2.18.1",
+    "nanoid": "^3.1.23",
     "next": "latest",
     "passport": "^0.4.1",
     "plaid": "^8.5.2",
@@ -28,7 +30,6 @@
     "react-dom": "^17.0.2",
     "react-loading-skeleton": "^2.1.1",
     "serverless-mysql": "^1.5.4",
-    "stripe": "^8.160.0",
     "swr": "^0.3.9"
   },
   "devDependencies": {
