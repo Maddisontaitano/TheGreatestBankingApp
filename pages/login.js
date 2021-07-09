@@ -1,6 +1,5 @@
-import Nav from '../components/Nav'
-import Container from '../components/Container'
-import LoginForm from '../components/LoginForm'
+import Container from '../components/global/Container'
+import LoginForm from '../components/forms/LoginForm'
 
 export default function NewEntryPage() {
   return (

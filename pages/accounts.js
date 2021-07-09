@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import accountsStyles from '../styles/Accounts.module.css'
+import accountsStyles from '../styles/pages/Accounts.module.css'
 import AccountCard from '../components/account/accountCard'
 
 const accounts = () => {

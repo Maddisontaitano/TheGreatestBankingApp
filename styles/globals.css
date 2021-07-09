@@ -27,6 +27,10 @@ body {
   margin-bottom: auto;
 }
 
+.d-none {
+  display: none;
+}
+
 .whiteText {
   color: #ffffff;
 }

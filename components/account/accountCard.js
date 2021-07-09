@@ -1,8 +1,8 @@
-import accountsStyles from '../../styles/Accounts.module.css'
+import accountsStyles from '../../styles/pages/Accounts.module.css'
 import { useRef } from 'react'
 import { useAccountTransactions } from '@/lib/swr-hooks'
-import Transactions from '../transactions/Transactions'
-import Container from '../Container'
+import Transactions from '../../components/transaction/Transactions'
+import Container from '../global/Container'
 
 const accountCard = (props) => {
     const {transactions, idLoad} = useAccountTransactions(props.id)

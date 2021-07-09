@@ -1,0 +1,15 @@
+.main {
+    position: absolute;
+    min-height: 78%;
+    height: auto;
+    width: 70%;
+    background-color: transparent ;
+    top: 8rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.cycle {
+    cursor: pointer;
+}

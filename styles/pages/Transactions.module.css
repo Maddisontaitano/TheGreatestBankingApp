@@ -1,0 +1,136 @@
+.containerB {
+    margin-top: 10vh;
+    margin-left: auto;
+    margin-right: auto; 
+ 
+    display: flex;
+
+    flex-direction: column;
+
+    width: 40%;
+}
+
+.titleA {
+    font-size: 3vw;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-bottom: 2.5vh;
+}
+
+.tableContainer {
+    background-color: #78a2f3;
+    border-radius: 10px;
+}
+
+.tableHeader, .tableFooter {
+    height: 4vw;
+}
+
+.tableHeaderA{
+    display: flex;
+    flex-direction: row;
+
+    padding: 0 1.5vw;
+
+    align-items: center;
+}
+
+.tableHeaderB{
+    display: flex;
+    flex-direction: row;
+
+    padding: 0 1.5vw;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.accountSelectButton {
+    margin: 0 .5vw;
+    padding: 3.5px 18px;
+    border: solid 1px transparent;
+}
+
+.accountSelectButton:focus {
+    outline: 0;
+}
+
+.accountSelectButtonActive {
+    border: solid 1px #c0ecfe95;
+    border-radius: 50px;
+}
+
+.table {
+    table-layout: fixed;
+    width: 100%;
+    
+    border-radius: 10px;
+}
+
+.type {
+    position: relative;
+    width: 58px;
+}
+
+.type::before {
+    content: "";
+    font-size: 40px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    text-align: center;
+    position: absolute;
+    width: 2.7vw;
+    height: 2.7vw;
+
+    top: 25.4%;
+    right: 0;
+
+    /* border-radius: 50%; */
+    background-image: url(../../public/transaction-negative.png);
+    background-size: cover;
+
+    z-index: 100;
+}
+
+.table td:nth-of-type(2) {
+    padding-left: 16px;
+}
+
+.table td:nth-of-type(3) {
+    text-align: right;
+    width: 100px;
+    padding-left: 0;
+    padding-right: 16px;
+}
+
+.table th {
+    text-align: left;
+    padding-left: 8px;
+
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.table td {
+    text-align: left;
+    padding-left: 8px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.table th, .table td {
+    /* border: 1px solid #c0ecfe; */
+    border-top: 1px solid #c0ecfe95;
+    border-bottom: 1px solid #c0ecfe95;
+    background-color: transparent;
+}
+
+.table td span {
+    color: #c0ecfe95;
+}

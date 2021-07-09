@@ -22,7 +22,20 @@ export function useAccounts(id: string) {
   console.log("**** Account Data ****")
 
   return {
-    accounts: data,
+    data: data,
+    isLoad: !error && !data,
+    isError: error,
+  }
+}
+
+export function useAccountsTransactionTable(id: string) {
+  const { data, error } = useSWR(`/api/accounts/get-user-accounts-transaction-table?id=${id}`, fetcher)
+  console.log("**** Account Data ****")
+  console.log(data)
+  console.log("**** Account Data ****")
+
+  return {
+    data: data,
     isLoad: !error && !data,
     isError: error,
   }
@@ -44,7 +57,7 @@ export function useUserTransactions(id: string) {
 
 // Get's transactions from account
 export function useAccountTransactions(id: string) {
-  const { data, error } = useSWR(`/api/get-account-transactions?id=${id}`, fetcher)
+  const { data, error } = useSWR(`/api/transactions/get-account-transactions?id=${id}`, fetcher)
   console.log(data) 
 
   return {

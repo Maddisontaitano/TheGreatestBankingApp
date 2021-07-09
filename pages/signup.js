@@ -1,6 +1,5 @@
-import Nav from '../components/Nav'
-import Container from '../components/Container'
-import UserEntryForm from '../components/UserEntryForm'
+import Container from '../components/global/Container'
+import UserEntryForm from '../components/forms/UserEntryForm'
 
 export default function NewUserPage() {
   return (

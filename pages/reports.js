@@ -1,4 +1,4 @@
-import reportsStyles from '../styles/Reports.module.css'
+import reportsStyles from '../styles/pages/Reports.module.css'
 import { useState } from 'react'
 import { Bar, Line } from 'react-chartjs-2'
 
@@ -24,16 +24,18 @@ const reports = () => {
                         {
                             label: 'deposite amount',
                             data: [12, 19, 3, 5, 2, 3,10],
-                            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
+                            backgroundColor: '#e7f378',
+                            hoverBackgroundColor: '#d0e22dd3',
+                            borderColor: '#d4df76',
                             borderWidth: 2
                         },
                         {
                             label: 'withdrawl amount',
                             data: [23, 30, 20, 3, 9, 22 ,11],
-                            backgroundColor: 'rgba(255, 159, 64, 0.5)',
-                            borderColor: 'rgba(255, 189, 64, 1)',
-                            borderWidth: 2
+                            backgroundColor: '#f6a4eb',
+                            hoverBackgroundColor: '#ff56e8be',
+                            borderColor: '#f397e7',
+                            borderWidth: 2 
                         }
                     ],
                 }}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import transactionsStyles from "../styles/Transactions.module.css";
+import transactionsStyles from "../styles/pages/Transactions.module.css";
 import TransactionHistory from "../components/transaction/TransactionHistory";
 
 const transactions = () => {
@@ -8,13 +8,8 @@ const transactions = () => {
   ]);
 
   return (
-    <div className={transactionsStyles.container}>
-      <h1>Transactions</h1>
-      <div className={transactionsStyles.top}>
-        <h4 className={transactionsStyles.descContainer}>Description</h4>
-        <div className={transactionsStyles.line}></div>
-        <h4 className={transactionsStyles.amountContainer}>Amount</h4>
-      </div>
+    <div className={transactionsStyles.containerA}>
+      
       <div>
         {transactionsFetch.map((transactions, key) => {
           return (

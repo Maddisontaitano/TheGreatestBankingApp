@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import styles from '../../styles/Index.module.css'
-import sectionStyles from '../../styles/Index/SectionA.module.css'
+import styles from '../../styles/pages/Index/Index.module.css'
+import sectionStyles from '../../styles/pages/Index/SectionA.module.css'
 
 const SectionA = () => {
     return (
