@@ -2,6 +2,7 @@ import styles from '../../styles/components/Form.module.css'
 
 import { useState } from 'react'
 import Router from 'next/router'
+import Link from 'next/link'
 
 import Button from '../global/Button'
 
@@ -28,11 +29,6 @@ export default function EntryForm() {
       setSubmitting(false)
       const data = await res.json()
       if (!res.ok) throw Error(data.message)
-      
-      // SETTING THE EXPIRY DATE OF THE COOKIE
-      const timestamp = new Date().getTime(); // current time
-      const expiryDate = timestamp + (60 * 60 * 24 * 1000 * 7)
-      // SETTING THE EXPIRY DATE OF THE COOKIE
 
       if (data.success) {
         setloginSucces("Succesfully Logged In")//Setting a succes message is login was succesfull
@@ -82,6 +78,11 @@ export default function EntryForm() {
       <Button disabled={submitting} type="submit">
         {submitting ? 'logging in ...' : 'Login'}
       </Button>
+        <br />
+        <br />
+      <Link href='/passwordreset' style={{cursor: 'pointer'}}>
+        Forgot Password
+      </Link>
 
       <p>{loginSucces}</p>
     </form>

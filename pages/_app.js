@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
         <title>The Greatest Banking App</title>
             <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
-        </Head>
+            </Head>
         <Component {...pageProps} />
       </Layout>
     </>
