@@ -1,7 +1,6 @@
 import { NextApiHandler } from 'next'
 import { query } from '../../../lib/db'
 var bcrypt = require('bcryptjs');
-import path from 'path';
 const handler: NextApiHandler = async (req, res) => {
   const { email, pass } = req.body;
 //   return res.json({email: email})
