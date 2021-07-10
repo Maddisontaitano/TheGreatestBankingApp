@@ -1,0 +1,94 @@
+.containerA {
+    width: 40vw;
+
+    height: fit-content;
+
+    background-color: #ffffff;
+
+    display: flex;
+
+    flex-direction: column;
+
+    border-radius: 10px;
+
+    margin-left: 11vw;
+    padding: 11vh 3vw;
+
+    z-index: 1000;
+
+    box-shadow: 0 30px 60px -12px rgb(50 50 93 / 25%), 0 18px 36px -18px rgb(0 0 0 / 30%), 0 -12px 36px -8px rgb(0 0 0 / 3%);
+}
+
+.title {
+    color: #6772e5;
+}
+
+.titleA {
+    font-size: 1.3vw;
+    font-weight: 500;
+
+    text-transform: uppercase;
+}
+
+.titleB {
+    font-size: 3.2vw;
+    font-weight: 400;
+
+    margin-top: 1vh;
+
+    line-height: 8.9vh;
+
+    width: 90%;
+    color: #32325d;
+}
+
+.descriptionA {
+    font-size: 1.55vw;
+    font-weight: 400;
+    line-height: 4.7vh;
+
+    margin-top: 4vh;
+    margin-bottom: 0;
+
+    color: #424770;
+}
+
+.buttonContainer {
+    margin-top: 5.3vh;
+}
+
+.buttonContainer a {
+    padding: 1vh 1.5vw;
+    text-transform: uppercase;
+
+    position: relative;
+
+    top: 0;
+
+    font-weight: 500;
+
+    border-radius: 3px;
+
+    transition: top .15s;
+}
+
+.buttonContainer a:hover {
+    transform:translateY(-2rem);
+
+    top: -1px;
+    opacity: 80%;
+}
+
+.buttonContainer a:first-of-type {
+    color: #ffffff;
+    background-color: #6772e5;;
+}
+
+.buttonContainer a:last-of-type {
+    color: #6772e5;
+    background-color: #ffffff;
+
+    margin-left: 1.3vw;
+
+    box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
+}

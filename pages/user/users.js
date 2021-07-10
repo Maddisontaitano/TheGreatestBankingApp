@@ -11,7 +11,7 @@ const users = () => {
     }
     return (
         <div>
-            <button onClick={() => handler()}>Users</button>
+            <button className='bg-white hover:bg-blue-700 text-black font-bold py-2 px-4 rounded' onClick={() => handler()}>Users</button>
         </div>
     )
 }

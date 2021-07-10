@@ -10,12 +10,12 @@ const handler: NextApiHandler = async (req, res) => {
     }
     const results = await query(
       `
-      SELECT * FROM password_change_requests WHERE token = '${token}'
+      SELECT * FROM password_reset_request WHERE token = '${token}'
       `
     )
 
     if (results[0]) {
-      res.status(200)
+      res.status(200).json({user: results[0]})
     } else {
       return res.status(404).json({message: "Invalid Token"});
     }

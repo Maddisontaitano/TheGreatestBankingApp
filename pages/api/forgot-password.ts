@@ -1,8 +1,12 @@
 import { NextApiHandler } from 'next'
 import { query } from '../../lib/db';
 import { nanoid } from 'nanoid'
+import moment from 'moment';
+import Filter from 'bad-words'
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey("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");
+
+const filter = new Filter()
 
 const handler: NextApiHandler = async (req, res) => {
     const { email } = req.body;
@@ -20,9 +24,14 @@ const handler: NextApiHandler = async (req, res) => {
     )
     if (results[0]) {
         const passwordResetToken = nanoid(10);
-        // if (typeof window !== 'undefined') {
-        //     window.localStorage.setItem('passwordResetToken', "ghgjhghgjhgjh"); //This will be stored in the database, I'm just using localStorage for now
-        // }
+        
+        await query(
+            `
+            INSERT INTO password_reset_request (userId, token, date, expiry)
+            VALUES ('${results[0].userId}', '${passwordResetToken}', '${moment().format('MMMM Do YYYY, h:mm')}', '${moment().add(4, 'minutes').format('MMMM Do YYYY, h:mm')}')
+            `
+          )
+        
         const msg = {
             to: email, // Change to your recipient
             from: 'udokovic@gmail.com', // Change to your verified sender

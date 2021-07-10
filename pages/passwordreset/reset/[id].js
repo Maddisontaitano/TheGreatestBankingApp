@@ -1,39 +1,44 @@
 import React, {useState} from 'react'
 import Button from '../../../components/Button'
-import Router from 'next/router'
+import Router, {useRouter} from 'next/router'
 // import 'fs';
 const resetPass = () => {
     const [updatedPassword, setupdatedPassword] = useState('');
-
+    const router = useRouter()
     const updateHandler = async () => {
         //THERE SHOULD BE AN INITIAL CHECK IF THE TOKEN EXISTS IN THE DATABASE
-        const passwordToken = localStorage.getItem('passwordResetToken');
-        const parsedPasswordToken = JSON.parse(passwordToken);
+        const passwordToken = router.query.id?.toString();
 
-        // console.log(parsedPasswordToken.userId)
-        // return;
-        fetch('/api/update-user-password', {
+        fetch('/api/verify-password-reset-token', {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                userId: parsedPasswordToken.userId,
-                updatedPassword: updatedPassword
-            }),
-        }).then((res) => res.json()).then((data) => {
-            console.log(data)
-            localStorage.removeItem('passwordResetToken');
-            fetch('/api/confirm-reset', {
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify({token: passwordToken})
+        }).then((res) => res.json()).then((user) => {
+            // console.log(user.user.userId);
+            // return;
+            fetch('/api/update-user-password', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                  'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    email: parsedPasswordToken.email
+                    userId: user.user.userId,
+                    updatedPassword: updatedPassword
+                }),
+            }).then((res) => res.json()).then((data) => {
+                console.log(data)
+                fetch('/api/confirm-reset', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: data.email
+                    })
                 })
-            })
-            Router.push('/login')
+                Router.push('/login')
+        })
+        
         }) 
         
     }

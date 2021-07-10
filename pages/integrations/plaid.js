@@ -1,25 +1,29 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Head from 'next/head'
-
-
+import { useIsLoggedIn } from '@/lib/swr-hooks';
+import router from 'next/router'
 const plaid = () => {
+    const {loggedin, userId} = useIsLoggedIn();
+
+    useEffect(() => {
+        !loggedin ? router.push('/login') : ''
+    }, [])
     // jQuery = window.jQuery
     const integratePlaid = async () => {
         const fetchLinkToken = async () => {
             const response = await fetch('/api/createLinkToken');
             const { linkToken } = await response.json();
-            // console.log(linkToken);
             return linkToken;
         };
     
         const handler = Plaid.create({
             token: await fetchLinkToken(),
             onSuccess: async (publicToken, metadata) => {
-                console.log(publicToken);
+                // console.log(publicToken);
                 // console.log(metadata);
                 fetch('/api/tokenExchange', {
                     method: 'POST',
-                    body: JSON.stringify({ publicToken }),
+                    body: JSON.stringify({ publicToken, userId }),
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -31,7 +35,7 @@ const plaid = () => {
                 // console.log(metadata);
             },
             onExit: (error, metadata) => {
-                console.log(error, metadata);
+                // console.log(error, metadata);
             },
         });
         handler.open()

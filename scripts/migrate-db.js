@@ -31,19 +31,19 @@ async function query(q) {
 // Create "entries" table if doesn't exist
 async function migrate() {
   try {
-    await query(`
-    ALTER TABLE transactions
-      ADD FOREIGN KEY (userId) REFERENCES users(userId)
-    `)
+    //  await query(`
+    //  ALTER TABLE accounts ADD bank_name TEXT NOT NULL
+    //  `)
     // Can run queries to test mySQL here
     // console.log('*******')
     // console.log(await query('SELECT * FROM users'))
     // console.log('*******')
     // console.log(await query('SELECT * FROM accounts'))
     // console.log('*******')
-    console.log(await query('SELECT * FROM transactions'))
+    // console.log(await query('SELECT * FROM transactions'))
     // console.log('*******')
     // console.log(await query('SELECT * FROM entries'))
+    console.log("Migrated")
   } catch (e) {
     console.log(e)
     console.error('could not run migration, double check your credentials.')
@@ -82,3 +82,18 @@ migrate().then(() => process.exit())
 //       dob TEXT NOT NULL,
 //       email TEXT NOT NULL,
 //       pass TEXT NOT NULL
+
+
+//      PASSWORD RESET TABLE CREATION
+//     CREATE TABLE IF NOT EXISTS password_reset_request ( 
+//       id INT AUTO_INCREMENT PRIMARY KEY,
+//       userId INT NOT NULL,
+//       token TEXT NOT NULL,
+//       date TEXT NOT NULL,
+//       expiry TEXT NOT NULL
+//  )
+
+//ALTER TABLE accounts ADD checking_id TEXT NOT NULL
+//ALTER TABLE accounts ADD savings_id TEXT NOT NULL
+//ALTER TABLE accounts ADD access_token TEXT NOT NULL
+//ALTER TABLE accounts ADD public_token TEXT NOT NULL

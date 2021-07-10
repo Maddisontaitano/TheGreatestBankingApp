@@ -14,9 +14,6 @@ export default function EditEntryPage() {
 
 
   if (user) {
-  console.log("**** Front Page User")
-  console.log(user)
-  console.log("**** Front Page User")
   return (
       <>
         <Container>
@@ -29,10 +26,10 @@ export default function EditEntryPage() {
           />
         </Container>
         <Container>
-          <Accounts 
+          {/* <Accounts 
             accounts={accounts} 
             fname={user.fname} 
-            lname={user.lname}/>
+            lname={user.lname}/> */}
         </Container>
       </>
     )

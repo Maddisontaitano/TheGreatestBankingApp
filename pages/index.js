@@ -1,12 +1,13 @@
+import React, { useState, useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton'
 
-import React, { useState, useEffect } from 'react';
+import SectionA from '../components/Index/SectionA'
+import SectionB from '../components/Index/SectionB'
+import SectionC from '../components/Index/SectionC'
+import SectionD from '../components/Index/SectionD'
+import SectionE from '../components/Index/SectionE'
 
-import Nav from '../components/Nav'
-import Container from '../components/Container'
-import Users from '../components/users/Users'
-
-// import { useUsers } from '@/lib/swr-hooks'
+import styles from '../styles/Index.module.css'
 
 import { useIsLoggedIn } from '@/lib/swr-hooks'
 
@@ -19,12 +20,11 @@ export default function IndexPage() {
   
   return (
     <div>
-      <h2>{loggedin ? "User Logged In" : "No User Logged In"}</h2>
-      {/* <Container>
-      </Container>
-      <Container>
-        <Users users={users} />
-      </Container> */}
+      <SectionA />
+      <SectionB />
+      <SectionC />
+      <SectionD />
+      <SectionE />
     </div>
   )
 }

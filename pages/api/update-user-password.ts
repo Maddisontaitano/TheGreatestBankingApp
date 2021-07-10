@@ -11,13 +11,21 @@ const handler: NextApiHandler = async (req, res) => {
 
     const hashedPassword = bcrypt.hashSync(updatedPassword, salt);
 
-    const results = await query(
+    await query(
       `
       UPDATE users SET pass = '${hashedPassword}' WHERE userId = '${userId}'
       `
     );
 
-        res.json({reset: true})
+    const results = await query(
+      `
+      SELECT email
+        FROM users
+        WHERE userId = '${userId}'
+      `
+    );
+
+        res.json({reset: true, email: results[0].email})
 
   } catch (e) {
     res.status(500).json({ message: "Failed" })

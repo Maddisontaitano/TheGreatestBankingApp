@@ -7,7 +7,7 @@ const handler: NextApiHandler = async (req, res) => {
 //   return res.json({email: email})
   try {
     if (!email || !pass) {
-      return res.status(400).json({ message: '`All fields are required' })
+      return res.status(400).json({ message: 'All fields are required' })
     }
     const results = await query(
       `
@@ -23,7 +23,7 @@ const handler: NextApiHandler = async (req, res) => {
         SELECT userId FROM users WHERE email = '${email}'
         `
       )
-      return res.json({success: bcrypt.compareSync(pass, results[0].pass), userId: userId[0].userId});
+      return res.json({success: bcrypt.compareSync(pass, results[0].pass), userId: userId[0].userId, user: results[0]});
     } else {
       return res.json({success: false});
     }

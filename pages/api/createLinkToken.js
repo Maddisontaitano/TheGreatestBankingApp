@@ -1,8 +1,8 @@
 const plaid = require('plaid');
 const plaidClient = new plaid.Client({
-    clientID: '60c9d85df827550010b03a3b', 
-    secret: '2100b4f5885c7916e922febc522d7e', 
-    env: plaid.environments.sandbox,
+    clientID: process.env.CLIENT_ID,
+    secret: process.env.SECRETE,
+    env: plaid.environments.development,
 })
 
 export default async (req, res) => {
@@ -13,7 +13,7 @@ export default async (req, res) => {
             client_user_id: 'some-unique-identifier',
         },
         client_name: 'Banking App',
-        products: ['auth', 'identity', 'income'],
+        products: ['auth', 'transactions'],
         country_codes: ['US'],
         language: 'en',
     });
