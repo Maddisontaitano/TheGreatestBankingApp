@@ -1,4 +1,5 @@
-import cn from 'clsx'
+// import cn from 'clsx'
+import styles from '../styles/Form.module.css'
 
 function Button({
   onClick = console.log,
@@ -12,18 +13,7 @@ function Button({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={cn(
-        'bg-black',
-        'text-white',
-        'p-2',
-        'rounded',
-        'uppercase',
-        'text-sm',
-        'font-bold',
-        {
-          [className]: Boolean(className),
-        }
-      )}
+      className={styles.button}
     >
       {children}
     </button>

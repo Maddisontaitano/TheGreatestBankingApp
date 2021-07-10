@@ -1,3 +1,5 @@
+import styles from '../styles/Form.module.css'
+
 import { useState } from 'react'
 import Router from 'next/router'
 import Link from 'next/link'
@@ -25,18 +27,20 @@ export default function EntryForm() {
         }),
       })
       setSubmitting(false)
-      const data = await res.json()
-      if (!res.ok) throw Error(data.message)
-
       // SETTING THE EXPIRY DATE OF THE COOKIE
       const timestamp = new Date().getTime(); // current time
       const expiryDate = timestamp + (60 * 60 * 24 * 1000 * 7)
       // SETTING THE EXPIRY DATE OF THE COOKIE
+      const data = await res.json()
+      if (!res.ok) throw Error(data.message)
 
       if (data.success) {
         setloginSucces("Succesfully Logged In")//Setting a succes message is login was succesfull
         document.cookie = `user=${data.userId}; ${expiryDate}; path=/;`;
-        Router.push('/')
+        // console.log(data.user)
+        // Router.push('/integrations/plaid');
+        // fetch('/')
+        Router.push(`/user/${data.userId}`)
       } else {
         setloginSucces("Wrong Username / Password");//Setting a succes message is login was succesfull
       }
@@ -48,27 +52,39 @@ export default function EntryForm() {
     }
   }
 
+  const testPass = () => {
+      fetch("/api/delete-access-token", {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        }
+      }).then((res) => res.json()).then((dt) => console.log(dt))
+  }
+
   return (
-    <form onSubmit={submitHandler}>
-      <div className="my-4">
+    <form className={styles.formContainer} onSubmit={submitHandler}>
+      <div className={styles.inputContainer}>
         <label htmlFor="email">
-          <h3 className="font-bold">Email</h3>
+          <h3 className={styles.label}>Email</h3>
         </label>
         <input
           id="email"
-          className="shadow border rounded w-full"
+          className={styles.input}
           type="text"
           name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-      </div><div className="my-4">
+      {/* <hr /> */}
+      </div>
+      {/* <hr /> */}
+      <div className={styles.inputContainer}>
         <label htmlFor="pass">
-          <h3 className="font-bold">Password</h3>
+          <h3 className={styles.label}>Password</h3>
         </label>
         <input
           id="pass"
-          className="shadow border rounded w-full"
+          className={styles.input}
           type="text"
           name="pass"
           value={pass}
@@ -76,7 +92,7 @@ export default function EntryForm() {
         />
       </div>
       <Button disabled={submitting} type="submit">
-        {submitting ? 'logging ...' : 'Login'}
+        {submitting ? 'logging in ...' : 'Login'}
       </Button>
         <br />
         <br />
@@ -85,6 +101,8 @@ export default function EntryForm() {
       </Link>
 
       <p>{loginSucces}</p>
+
+      <button onClick={() => testPass()}>Test</button>
     </form>
   )
 }

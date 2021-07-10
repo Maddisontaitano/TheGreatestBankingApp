@@ -6,7 +6,7 @@ function fetcher(url: string) {
 
 export function useUsers() {
   const { data, error } = useSWR('/api/get-users', fetcher)
-  console.log(data)
+  // console.log(data)
 
   return {
     users: data,
@@ -29,20 +29,20 @@ export function useAccounts(id: string) {
 }
 
 // Get's all users transactions
-export function useUserTransactions(id: string) {
-  const { data, error } = useSWR(`/api/get-user-transactions?id=${id}`, fetcher)
+export function useUserTransactions(id: string, account) {
+  const { data, error } = useSWR(`/api/get-user-transactions?id=${id}&account=${account}`, fetcher)
   console.log("**** Transaction Data ****")
   console.log(data)
   console.log("**** Transaction Data ****")
 
   return {
-    accounts: data,
+    transactions: data,
     isLoad: !error && !data,
     isError: error,
   }
 }
 
-// Get's transactions from account
+//Get's transactions from account
 export function useAccountTransactions(id: string) {
   const { data, error } = useSWR(`/api/get-account-transactions?id=${id}`, fetcher)
   console.log(data) 
@@ -54,21 +54,21 @@ export function useAccountTransactions(id: string) {
   }
 }
 
-// export function useForgotPassword(email: string) {
-//   const { data, error } = useSWR(`/api/forgot-password?email=${email}`, fetcher);
+export function useForgotPassword(email: string) {
+  const { data, error } = useSWR(`/api/forgot-password?email=${email}`, fetcher);
 
-//   console.log(data)
+  console.log(data)
 
-//   return {
-//     data
-//   }
-// }
+  return {
+    data
+  }
+}
 
 export function useUser(id: string) {
   const { data, error } = useSWR(`/api/get-user?id=${id}`, fetcher) // this api still needs to be setup
-  console.log("**** User Data ****")
-  console.log(data)
-  console.log("**** User Data ****")
+  // console.log("**** User Data ****")
+  // console.log(data)
+  // console.log("**** User Data ****")
   return {
     user: data,
     isError: error
@@ -77,18 +77,18 @@ export function useUser(id: string) {
 
 export function useAccount(id: string) {
   const { data, error } = useSWR(`/api/get-account?id=${id}`, fetcher) // this api still needs to be setup
-  console.log("**** User Data ****")
-  console.log(data)
-  console.log("**** User Data ****")
+  // console.log("**** User Accounts ****")
+  // console.log(data)
+  // console.log("**** User Accounts ****")
   return {
-    user: data,
+    accounts: data,
     isError: error
   }
 }
 
 export function useEntries() {
   const { data, error } = useSWR(`/api/get-entries`, fetcher)
-  console.log(data)
+  // console.log(data)
 
   return {
     entries: data,

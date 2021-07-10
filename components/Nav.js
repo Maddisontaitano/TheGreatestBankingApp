@@ -1,7 +1,8 @@
 import navStyles from '../styles/Nav.module.css'
-import Link from 'next/link'
+import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react'
 import { useIsLoggedIn } from '@/lib/swr-hooks'
+import Router from 'next/router';
 
 const Nav = () => {
     const {loggedin, userId} = useIsLoggedIn()
@@ -41,8 +42,8 @@ const Nav = () => {
     const logUserOut = () => {
         if (loggedin) {
             document.cookie = 'user=; Max-Age=0; path=/;';
-            // alert('User Logged Out');
-            location.reload()
+            Router.push("/login")
+            // location.reload()
          } else {
             return;
          }
@@ -51,14 +52,16 @@ const Nav = () => {
     return (
         <div className={navStyles.nav}>
             <ul>
-                <li className={navStyles.bank}><img src='https://i.ibb.co/xszpynb/favicon.png' alt='bank'></img></li>
-                <li><Link href='/'>Home</Link></li>
+                {/* <img src='https://i.ibb.co/xszpynb/favicon.png' alt='bank'></img> */}
+                {/* <img src='https://i.ibb.co/LZdfPsd/account.png' alt='user'></img> */}
+                <li className={navStyles.title}><h2>Ark</h2></li>
+                <li><Link href={loggedin ? `/user/${userId}` : '/'}>Home</Link></li>
                 <li><Link href='/transactions'>Transactions</Link></li>
                 <li><Link href='/reports'>Reports</Link></li>
                 <li><Link href='/integrations'>Integrations</Link></li>
                 <li><Link href='/accounts'>Accounts</Link></li>
                 <li className={navStyles.user} onMouseEnter={showDropdown} onMouseLeave={hideDropdown} >
-                    <Link href='#'><img src='https://i.ibb.co/LZdfPsd/account.png' alt='user'></img></Link>
+                    <Link href='#' className={navStyles.signIn}>Sign in</Link>
                     <div className={navStyles.connector}></div>
                     <div className={navStyles.dropdown} ref={dropdown} style={{visibility: dropdownVisibility}} >
                         <ul>

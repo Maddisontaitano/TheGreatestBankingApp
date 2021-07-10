@@ -1,3 +1,5 @@
+import styles from '../styles/Form.module.css'
+
 import { useState, useEffect } from 'react'
 import Router from 'next/router'
 import Button from '../components/Button'
@@ -43,40 +45,40 @@ export default function EntryForm() {
   }
 
   return (
-    <form onSubmit={submitHandler}>
-      <div className="my-4">
+    <form className={styles.formContainer} onSubmit={submitHandler}>
+      <div className={styles.inputContainer}>
         <label htmlFor="fname">
-          <h3 className="font-bold">First</h3>
+          <h3 className={styles.label}>First</h3>
         </label>
         <input
           id="fname"
-          className="shadow border rounded w-full"
+          className={styles.input}
           type="text"
           name="fname"
           value={fname}
           onChange={(e) => setFname(e.target.value)}
         />
       </div>
-      <div className="my-4">
+      <div className={styles.inputContainer}>
         <label htmlFor="lname">
-          <h3 className="font-bold">Last</h3>
+          <h3 className={styles.label}>Last</h3>
         </label>
         <input
           id="lname"
-          className="shadow border rounded w-full"
+          className={styles.input}
           type="text"
           name="lname"
           value={lname}
           onChange={(e) => setLname(e.target.value)}
         />
       </div>
-      <div className="my-4">
+      <div className={styles.inputContainer}>
         <label htmlFor="email">
-          <h3 className="font-bold">Email</h3>
+          <h3 className={styles.label}>Email</h3>
         </label>
         <input
           id="email"
-          className="shadow border rounded w-full"
+          className={styles.input}
           type="text"
           name="email"
           value={email}
