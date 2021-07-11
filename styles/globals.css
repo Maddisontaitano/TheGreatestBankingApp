@@ -97,11 +97,18 @@ body {
   margin-bottom: auto;
   margin-left: 4vw;
   margin-right: 3vw;
+
+  position: relative;
 }
 
 .toggleChartContainer * {
   width: 12vw !important;
   margin-top: 1vh;
+}
+
+.rangeForm {
+  position: absolute;
+  bottom: -20.4vh;
 }
 
 a {

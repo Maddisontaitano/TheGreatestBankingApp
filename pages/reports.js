@@ -9,36 +9,68 @@ import ToggleChartData from '../components/reports/ToggleChartData'
 
 const reports = () => {
     
-    function dateMinusDays(days) {
-        return `${new Date(new Date().getTime() - (days * 24 * 60 * 60 * 1000)).getFullYear()}-${new Date(new Date().getTime() - (days * 24 * 60 * 60 * 1000)).getMonth()+1}-${new Date(new Date().getTime() - (days * 24 * 60 * 60 * 1000)).getDate()}`
-    }
-
-    const [ChartType, changeChartType] = useState(Bar)
-    const [dates, setDates] = useState([])
-    const [startDate, setStartDate] = useState(dateMinusDays(7))
-    const [endDate, setEndDate] = useState(dateMinusDays(0))
-    const [depositNumbers, setDepositNumbers] = useState([1,2,3,4,5,6,7])
-    const [withdrawlNumbers, setWithdrawlNumbers] = useState([3,2,5,12,3,10,2])
-    const [predictionNumbers, setPredictionNumbers] = useState([6,5,3,3,4,6,7])
-    const [chartState, setChartState] = useState({data: depositNumbers, label: 'Deposit amount', backgroundColor: 'blue', hoverColorBackground: 'lightblue', borderColor: 'darkBlue'})
-
-    function pickTimePeriod(start, end) {
-        const newDates = getDaysArray(start, end)
-        setDates(newDates)
-    }
+    console.log()
 
     const getDaysArray = (start, end) => {
-        let arr = [];
-        let date;
+        let arr = [];   
+        let dt = new Date(start)
+        let dtdt = dt.setDate(new Date(start).getDate()+1)
+        for(dtdt; dt <= new Date(end).setDate(new Date(end).getDate()+1); dt.setDate(dt.getDate()+1) ){
+            arr.push(new Date(dt).toDateString());
+        }
+        return arr;
+    };
+
+    const getTimePeriodDaysArray = (start, end) => {
+        let arr = [];   
         for(let dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate()+1) ){
             arr.push(new Date(dt).toDateString());
         }
         return arr;
     };
 
+    const dataiod = getDaysArray(getCorrectValue(dateMinusDays(7)), getCorrectValue(dateMinusDays(0)))
+
+    const [ChartType, changeChartType] = useState(Bar)
+    const [isFormToggled, toggleForm] = useState(false)
+    const [dates, setDates] = useState(dataiod)
+    const [startDate, setStartDate] = useState(getCorrectValue(dateMinusDays(7)))
+    const [endDate, setEndDate] = useState(getCorrectValue(dateMinusDays(0)))
+    const [depositNumbers, setDepositNumbers] = useState([1,2,3,4,5,6,7])
+    const [withdrawlNumbers, setWithdrawlNumbers] = useState([3,2,5,12,3,10,2])
+    const [predictionNumbers, setPredictionNumbers] = useState([6,5,3,3,4,6,7])
+    const [chartState, setChartState] = useState({data: depositNumbers, label: 'Deposit amount', backgroundColor: 'blue', hoverColorBackground: 'lightblue', borderColor: 'darkBlue'})
+
+    function dateMinusDays(days) {
+        return `${new Date(new Date().getTime() - (days * 24 * 60 * 60 * 1000)).getFullYear()}-${new Date(new Date().getTime() - (days * 24 * 60 * 60 * 1000)).getMonth()+1}-${new Date(new Date().getTime() - (days * 24 * 60 * 60 * 1000)).getDate()}`
+    }
+
+    function getCorrectValue(val) {
+        if(val.length < 10) {
+            val = val.split('-', 3)
+            if (val[1].length === 1) {
+                val[1] = '0' + val[1]
+            }
+            if (val[2].length === 1) {
+                val[2] = '0' + val[2]
+            }
+            val = val.join('-')
+            return val
+        } else return val;
+    }
+
+    function pickTimePeriod(start, end) {
+        console.log('Before pikcTimePeriod: start: ' + start + ' end: ' + end)
+        const newDates = getTimePeriodDaysArray(start, end)
+        console.log('After pikcTimePeriod: newDates: ' + newDates)
+        setDates(newDates)
+    }
+
     function handleRangeChange(e) {
         e.preventDefault()
+        console.log('Before handleRangeChange: start: ' + start.value + ' end: ' + end.value)
         const newDates = getDaysArray(start.value, end.value)
+        console.log('After handleRangeChange: newDates: ' + newDates)
         setDates(newDates)
     }
 
@@ -214,8 +246,18 @@ const reports = () => {
                     />
                 </div>
                     <ToggleChartData showDeposit={showDeposit} showWithdrawl={showWithdrawl} 
-                    showPrediction={showPrediction} pickTimePeriod={pickTimePeriod} /> 
-                    
+                    showPrediction={showPrediction} pickTimePeriod={pickTimePeriod} customOn={() => toggleForm(true)} customOff={() => toggleForm(false)} > 
+                          {!isFormToggled ?
+                                <form className="rangeForm" onSubmit={handleRangeChange}>
+                                    <label htmlFor="start">From: </label>
+                                    <input id="start" name="start" type='date' value={startDate} onChange={({value}) => {setStartDate(value); console.log(startDate)}} /><br/>
+                                    <label htmlFor="end">To: </label>
+                                    <input id="end" name="end" type='date' value={endDate} onChange={({value}) => setEndDate(value)}/><br/>
+                                    <button>Apply</button>
+                                </form>
+                                : null
+                          }
+                    </ToggleChartData>
             </div>
             <DualButton classNameProp="buttonContainerB" 
             button1Text="Cycle Chart" button1OnClick={cycleChart} 
@@ -241,14 +283,6 @@ const reports = () => {
                     </tr>
                 </tbody>
             </table>
-            <form onSubmit={handleRangeChange}>
-                {console.log(startDate)}
-                <label htmlFor="start">Start </label>
-                <input id="start" name="start" type='date' value={startDate} onChange={({value}) => setStartDate(value)} /><br/>
-                <label htmlFor="end">End </label>
-                <input id="end" name="end" type='date' value={endDate} onChange={({value}) => setEndDate(value)}/><br/>
-                <button>Apply</button>
-            </form>
         </div>
     )
 }

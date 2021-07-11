@@ -12,7 +12,7 @@ const ToggleChartData = (props) => {
     }
 
     function dateMinusDays(days) {
-        return `${new Date(new Date().getTime() - (days * 24 * 60 * 60 * 1000)).getFullYear()}-${new Date(new Date().getTime() - (days * 24 * 60 * 60 * 1000)).getMonth()+1}-${new Date(new Date().getTime() - (days * 24 * 60 * 60 * 1000)).getDate()}`
+        return `${new Date(new Date().getTime() - (days+1 * 24 * 60 * 60 * 1000)).getFullYear()}-${new Date(new Date().getTime() - (days * 24 * 60 * 60 * 1000)).getMonth()+1}-${new Date(new Date().getTime() - (days * 24 * 60 * 60 * 1000)).getDate()}`
     }
 
     function dateBackMonths(months) {
@@ -37,7 +37,12 @@ const ToggleChartData = (props) => {
     let lastYear2 = dateMinusDays(365)
 
     useEffect(() => {
-        if(rangeValue) {
+
+        if (rangeValue === 'custom') {
+            props.customOn()
+        }
+        else if(rangeValue) {
+            props.customOff()
             let x = rangeValue;
             let array = x.split(" ", 2)
             let value1 = array[0]
@@ -56,6 +61,8 @@ const ToggleChartData = (props) => {
             <PrimaryButton buttonText="Withdrawals" buttonClick={props.showWithdrawl} />
             <PrimaryButton buttonText="Projection" buttonClick={props.showPrediction} />
             <select value={rangeValue} onChange={(e) => setRangeValue(e.target.value)}>
+                <option disabled selected hidden>Pick a Range</option>
+                <option value="custom">Custom Range</option>
                 <option value={`${currentWeek1} ${currentWeek2}`}>
                     Current Week</option>  
                 <option value={`${lastWeek1} ${lastWeek2}`}>Last Week</option>
@@ -66,6 +73,7 @@ const ToggleChartData = (props) => {
                 <option value={`${currentYear1} ${currentYear2}`}>Current Year</option>
                 <option value={`${lastYear1} ${lastYear2}`}>Last Year</option>
             </select>
+            {props.children}
         </div>
     )
 }
