@@ -1,0 +1,51 @@
+.rangeForm {
+    position: absolute;
+    bottom: -18.4vh;
+}
+
+.dateInput {
+    background-color: #6772e5;
+    color: #ffffff;
+
+    font-weight: 500;
+
+    padding: 1vh .3vw 1vh .5vw;
+
+    position: relative;
+}
+
+.dateInput::-webkit-calendar-picker-indicator {
+    background: none;
+    z-index: 100;
+}
+
+.dateInput::before {
+    color: #ffffff;
+    font-weight: 400;
+    background: none;
+    display: block;
+    font-family: 'FontAwesome';
+    content: '\f073';
+    position: absolute;
+    right: .5vw;
+}
+
+.selectDropDown {
+    position: relative;
+
+    border: 1px solid transparent;
+
+    background-color: #ffffff;
+    color: #6772e5;
+    box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
+
+    padding: .3vh .6vw;
+}
+/* 
+.selectDropDown:focus {
+    border: 1px solid #6772e5 !important;
+}
+
+.selectDropDown:active {
+    border: 1px solid #6772e5;
+} */

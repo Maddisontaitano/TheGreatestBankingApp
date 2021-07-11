@@ -1,10 +1,12 @@
 import reportsStyles from '../styles/pages/Reports.module.css'
+import dateFormStyles from '../styles/components/DateForm.module.css'
 import { useState } from 'react'
 import { Bar, Line } from 'react-chartjs-2'
 import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'
 import { autoTable } from 'jspdf-autotable'
 import DualButton from '../components/global/DualButton'
+import SecondaryButton from '../components/global/SecondaryButton'
 import ToggleChartData from '../components/reports/ToggleChartData'
 
 const reports = () => {
@@ -248,12 +250,12 @@ const reports = () => {
                     <ToggleChartData showDeposit={showDeposit} showWithdrawl={showWithdrawl} 
                     showPrediction={showPrediction} pickTimePeriod={pickTimePeriod} customOn={() => toggleForm(true)} customOff={() => toggleForm(false)} > 
                           {!isFormToggled ?
-                                <form className="rangeForm" onSubmit={handleRangeChange}>
-                                    <label htmlFor="start">From: </label>
-                                    <input id="start" name="start" type='date' value={startDate} onChange={({value}) => {setStartDate(value); console.log(startDate)}} /><br/>
-                                    <label htmlFor="end">To: </label>
-                                    <input id="end" name="end" type='date' value={endDate} onChange={({value}) => setEndDate(value)}/><br/>
-                                    <button>Apply</button>
+                                <form className={dateFormStyles.rangeForm} onSubmit={handleRangeChange}>
+                                    {/* <label htmlFor="start">From: </label> */}
+                                    <input className={dateFormStyles.dateInput} id="start" name="start" type='date' value={startDate} onChange={({value}) => {setStartDate(value); console.log(startDate)}} /><br/>
+                                    {/* <label htmlFor="end">To: </label> */}
+                                    <input className={dateFormStyles.dateInput} id="end" name="end" type='date' value={endDate} onChange={({value}) => setEndDate(value)}/><br/>
+                                    <SecondaryButton buttonText="Apply"></SecondaryButton>
                                 </form>
                                 : null
                           }

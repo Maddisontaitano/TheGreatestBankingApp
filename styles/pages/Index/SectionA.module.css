@@ -73,7 +73,6 @@
 }
 
 .buttonContainer a:hover, .buttonContainer button:hover {
-
     top: -1px;
     opacity: 80%;
 }

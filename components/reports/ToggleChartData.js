@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PrimaryButton from '../global/PrimaryButton'
-
+import dateFormStyles from '../../styles/components/DateForm.module.css'
 
 const ToggleChartData = (props) => {
     const [rangeValue, setRangeValue] = useState()
@@ -60,7 +60,8 @@ const ToggleChartData = (props) => {
             <PrimaryButton buttonText="Deposits" buttonClick={props.showDeposit} />
             <PrimaryButton buttonText="Withdrawals" buttonClick={props.showWithdrawl} />
             <PrimaryButton buttonText="Projection" buttonClick={props.showPrediction} />
-            <select value={rangeValue} onChange={(e) => setRangeValue(e.target.value)}>
+            <select className={dateFormStyles.selectDropDown} value={rangeValue} onChange={(e) => setRangeValue(e.target.value)}>
+                <i class="fas fa-chevron-circle-down"></i>
                 <option disabled selected hidden>Pick a Range</option>
                 <option value="custom">Custom Range</option>
                 <option value={`${currentWeek1} ${currentWeek2}`}>
