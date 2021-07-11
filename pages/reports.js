@@ -249,7 +249,7 @@ const reports = () => {
                 </div>
                     <ToggleChartData showDeposit={showDeposit} showWithdrawl={showWithdrawl} 
                     showPrediction={showPrediction} pickTimePeriod={pickTimePeriod} customOn={() => toggleForm(true)} customOff={() => toggleForm(false)} > 
-                          {!isFormToggled ?
+                          {isFormToggled ?
                                 <form className={dateFormStyles.rangeForm} onSubmit={handleRangeChange}>
                                     {/* <label htmlFor="start">From: </label> */}
                                     <input className={dateFormStyles.dateInput} id="start" name="start" type='date' value={startDate} onChange={({value}) => {setStartDate(value); console.log(startDate)}} /><br/>
