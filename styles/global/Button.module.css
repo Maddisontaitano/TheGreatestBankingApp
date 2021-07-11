@@ -1,0 +1,21 @@
+.button {
+    padding: 1vh 1.5vw;
+    text-transform: uppercase;
+
+    position: relative;
+
+    top: 0;
+
+    width: fit-content;
+
+    font-weight: 500;
+
+    border-radius: 3px;
+
+    transition: top .15s;
+}
+
+.buttonA {
+    color: #ffffff;
+    background-color: #6772e5;
+}

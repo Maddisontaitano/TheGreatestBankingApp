@@ -32,8 +32,7 @@ async function query(q) {
 async function migrate() {
   try {
     await query(`
-    INSERT INTO transactions (accountId, description, cost, transactionType)
-    VALUES (2, 'levis', 17.65, '-')
+    UPDATE accounts SET nickname = 'wayfair' WHERE accountId = 2;
     `)
     // Can run queries to test mySQL here
     // console.log('*******')

@@ -1,13 +1,30 @@
 .main {
     position: absolute;
     min-height: 78%;
-    height: auto;
-    width: 70%;
-    background-color: transparent ;
-    top: 8rem;
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff ;
+    /* top: 8rem; */
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
+    flex-direction: column;
+}
+
+.topContainer {
+    width: fit-content;
+    height: fit-content;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.chartSize {
+    width: 60vw;
+    height: fit-content;
+    color: #2a3decb7;
+
+    /* margin-left: 5vw; */
+    margin-right: auto;
 }
 
 .cycle {

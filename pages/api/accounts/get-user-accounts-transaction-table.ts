@@ -10,7 +10,7 @@ const handler: NextApiHandler = async (req, res) => {
     const results = await query(
         `
         SELECT accountId,
-        CONCAT(SUBSTRING(type, 1, 3), '...') as type
+        CONCAT(SUBSTRING(nickname, 1, 3), '...') as type
         FROM accounts
         WHERE userId = ?
         `,

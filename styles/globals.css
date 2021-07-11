@@ -14,8 +14,20 @@ body {
   overflow-x: hidden;
 }
 
+#myTable td {
+  background-color: blue;
+}
+
+.customTable, .customTable td {
+  background-color: blue;
+}
+
 .flex {
   display: flex;
+}
+
+.column {
+  flex-direction: column;
 }
 
 .row {
@@ -71,6 +83,25 @@ body {
 .dualButtonContainer {
   display: inline-block;
   height: fit-content;
+}
+
+.buttonContainerB {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.toggleChartContainer {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 4vw;
+  margin-right: 3vw;
+}
+
+.toggleChartContainer * {
+  width: 12vw !important;
+  margin-top: 1vh;
 }
 
 a {

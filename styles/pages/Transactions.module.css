@@ -1,5 +1,6 @@
+
 .containerB {
-    margin-top: 10vh;
+    margin-top: 2vh;
     margin-left: auto;
     margin-right: auto; 
  
@@ -8,6 +9,14 @@
     flex-direction: column;
 
     width: 40%;
+}
+
+.containerC {
+    margin-top: 10vh;
+    background-color: #78a2f3;
+    border-radius: 10px;
+
+    padding: 3vh 1.4vw 4vh 1.4vw;
 }
 
 .titleA {
@@ -133,4 +142,56 @@
 
 .table td span {
     color: #c0ecfe95;
+}
+
+/* Balance Container Start */
+
+.containerC p {
+    font-weight: 500;
+}
+
+.balanceAmount {
+    font-size: 4vw;
+    margin-top: 0;
+
+    padding: 0;
+
+    line-height: 4vw;
+}
+
+.containerC hr {
+    /*      top right bottom left */
+    margin: 4.15vh 0 2.85vh 0 ;
+
+    border-top: .15vh solid #c0ecfe95;
+}
+
+.accountBalance {
+    color: #c0ecfe95;
+    font-weight: 500;
+}
+
+.containerC div {
+    margin-top: 1vh;
+}
+
+.containerC div:first-of-type {
+    margin-top: 0;
+}
+
+.accountBalanceContainer {
+    display: inline-flex;
+
+    padding: 0 1vw;
+
+    box-sizing: border-box;
+
+    position: relative;
+}
+
+.accountBalanceContainer p {
+    position: absolute;
+    right: 1vw;
+
+    color: #444444;
 }

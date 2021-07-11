@@ -57,7 +57,7 @@
     margin-top: 5.3vh;
 }
 
-.buttonContainer a {
+.buttonContainer a, .buttonContainer button {
     padding: 1vh 1.5vw;
     text-transform: uppercase;
 
@@ -72,19 +72,18 @@
     transition: top .15s;
 }
 
-.buttonContainer a:hover {
-    transform:translateY(-2rem);
+.buttonContainer a:hover, .buttonContainer button:hover {
 
     top: -1px;
     opacity: 80%;
 }
 
-.buttonContainer a:first-of-type {
+.buttonContainer a:first-of-type, .buttonContainer button:first-of-type {
     color: #ffffff;
     background-color: #6772e5;;
 }
 
-.buttonContainer a:last-of-type {
+.buttonContainer a:last-of-type, .buttonContainer button:last-of-type {
     color: #6772e5;
     background-color: #ffffff;
 
