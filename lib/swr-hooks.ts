@@ -34,8 +34,18 @@ export function useAccountsTransactionTable(id: string) {
   console.log(data)
   console.log("**** Account Data ****")
 
+  function getData(data) {
+    if(data) {
+      console.log(data[0].accountId)
+      return data[0].accountId
+    }
+  }
+  const defaultValue = getData(data)
+  console.log(defaultValue)
+
   return {
     data: data,
+    defaultValue: defaultValue,
     isLoad: !error && !data,
     isError: error,
   }
@@ -43,13 +53,14 @@ export function useAccountsTransactionTable(id: string) {
 
 // Get's all users transactions
 export function useUserTransactions(id: string) {
-  const { data, error } = useSWR(`/api/get-user-transactions?id=${id}`, fetcher)
-  console.log("**** Transaction Data ****")
-  console.log(data)
-  console.log("**** Transaction Data ****")
+  const { data, error } = useSWR(`/api/transactions/get-user-transactions?id=${id}`, fetcher)
+  console.log("**** User All Transaction Data ****")
+  // console.log(data)
+  console.log("**** User All Transaction Data ****")
 
+  // Getting user transaction data Step #2
   return {
-    accounts: data,
+    userData: data,
     isLoad: !error && !data,
     isError: error,
   }
@@ -58,6 +69,19 @@ export function useUserTransactions(id: string) {
 // Get's transactions from account
 export function useAccountTransactions(id: string) {
   const { data, error } = useSWR(`/api/transactions/get-account-transactions?id=${id}`, fetcher)
+  // console.log(data) 
+
+  return {
+    transactions: data,
+    isLoad: !error && !data,
+    isError: error,
+  }
+}
+
+// Get all user transactions date from to
+export function useUserTransactionsDates(id: string, startDate: string, endDate: string) {
+  console.log(`${id} ${startDate} ${endDate}`)
+  const { data, error } = useSWR(`/api/transactions/get-user-transactions-date-from-to?id=${id}&startDate=${startDate}&endDate=${endDate}`, fetcher)
   console.log(data) 
 
   return {
@@ -89,12 +113,12 @@ export function useUser(id: string) {
 }
 
 export function useAccount(id: string) {
-  const { data, error } = useSWR(`/api/get-account?id=${id}`, fetcher) // this api still needs to be setup
+  const { data, error } = useSWR(`/api/accounts/get-account?id=${id}`, fetcher) // this api still needs to be setup
   console.log("**** User Data ****")
   console.log(data)
   console.log("**** User Data ****")
   return {
-    user: data,
+    account: data,
     isError: error
   }
 }

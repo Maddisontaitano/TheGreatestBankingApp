@@ -31,17 +31,20 @@ async function query(q) {
 // Create "entries" table if doesn't exist
 async function migrate() {
   try {
-    await query(`
-    UPDATE accounts SET nickname = 'wayfair' WHERE accountId = 2;
-    `)
+    // await query(`
+    // INSERT INTO transactions (accountId, description, transactionType, cost, userId, date, plaidId) 
+    //   VALUES (110, "Birthday Cash", "Revenue", 219.57, 37, "2021-07-08", "sadfjlkhsfdioyu")
+    // `)
     // Can run queries to test mySQL here
     // console.log('*******')
     // console.log(await query('SELECT * FROM users'))
     // console.log('*******')
-    console.log(await query('SELECT * FROM accounts'))
+    console.log(await query('SELECT * FROM accounts ORDER BY accountId DESC LIMIT 10'))
     // console.log('*******')
-    console.log(await query('SELECT * FROM transactions'))
-    // console.log('*******')
+    console.log(await query('SELECT * FROM transactions ORDER BY transactionId ASC LIMIT 10'))
+    console.log(await query('SELECT * FROM users ORDER BY userId DESC LIMIT 10'))
+    // console.log(await query(`SELECT date, cost FROM transactions WHERE date >= "2020-03-12" AND date <= "2020-07-12" AND accountId = 107`))
+    // console.log(await query(`SELECT cost FROM transactions WHERE transactionType = "Revenue" AND accountId = 107`))
     // console.log(await query('SELECT * FROM entries'))
   } catch (e) {
     console.log(e)
@@ -51,6 +54,9 @@ async function migrate() {
 }
 
 migrate().then(() => process.exit())
+
+// Deletes most recent transaction by for account
+// DELETE FROM transactions WHERE accountID = 107 ORDER BY transactionId DESC LIMIT 1
 
 // Insert into
 // INSERT INTO users ()

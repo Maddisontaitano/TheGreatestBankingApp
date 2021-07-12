@@ -9,7 +9,7 @@ function Transactions({ transactions }) {
      <table className={transactionsStyles.table}>
         <tbody>
           {transactions.map((e) => (
-            <TransactionRow key={e.transactionId} date={e.transactionDate} description={e.description} amount={e.cost}/>
+            <TransactionRow key={e.transactionId} type={e.transactionType} date={e.transactionDate} description={e.description} amount={e.cost}/>
           ))}
         </tbody>
      </table>

@@ -1,24 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import transactionsStyles from "../../styles/pages/Transactions.module.css";
 
 import Transactions from './Transactions';
+import TransactionTableSkeleton from './Skeletons/TransactionsTableSkeleton';
 
 import { useAccountTransactions } from '@/lib/swr-hooks';
 
 const TransactionTable = (props) => {
     const { transactions } = useAccountTransactions(props.accountId);
-    if(props.accountId == props.account) {
-        return (
-            <div className={transactionsStyles.containerB} id={props.id}>
-                <div className={transactionsStyles.tableContainer}>
+    const [tableHeight, setTableHeight] = useState(82)
+    const extendTable = (val) => {
+        setTableHeight(val += 82)
+    }
+    const shrinkTable = (val) => {
+        if(val > 82) {
+            setTableHeight(val -= 82)
+        } else return
+    }
+    if(transactions) {
+        if(props.accountId == props.account) {
+            return (
+                <div className={transactionsStyles.containerB} id={props.id}>
                         {props.children}                    
-                        <Transactions transactions={transactions} />
-                    <div className={transactionsStyles.tableFooter}></div>
-                </div>    
-            </div>
-        )
+                    <div style={{maxHeight: `${tableHeight}vh`}} className={transactionsStyles.tableContainer}>
+                            {/* {props.children}                     */}
+                            <Transactions transactions={transactions} />
+                        {/* <div className={transactionsStyles.tableFooter}></div> */}
+                    </div>    
+                    <div className={transactionsStyles.tableFooter}>
+                        <button className={transactionsStyles.extendButton} onClick={() => extendTable(tableHeight)}>See more items</button>
+                        <button className={transactionsStyles.extendButton} onClick={() => shrinkTable(tableHeight)}>See less items</button>
+                    </div>
+                </div>
+            )
+        } else {
+            return <div className="d-none"></div> 
+        }
     } else {
-        return <div className="d-none"></div> 
+        return <TransactionTableSkeleton />
     }
 }
 

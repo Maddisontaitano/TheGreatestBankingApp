@@ -1,29 +1,22 @@
 import transactionsStyles from "../../styles/pages/Transactions.module.css";
 import { useState } from "react";
-import { useAccounts, useAccountsTransactionTable } from "@/lib/swr-hooks";
+import { useAccounts, useAccountsTransactionTable, useIsLoggedIn } from "@/lib/swr-hooks";
 import TransactionTable from './TransactionTable'
 import TransactionToggleMenu from './TransactionToggleMenu'
 
-const TransactionHistory = () => {
-  const [ account, setAccount ] = useState(1);
-  const { data, isLoad } = useAccountsTransactionTable(1);
-  const [ activeButton, setActiveButton ] = useState(1);
+function TransactionHistory ({ accountData, account, activeButton, updateAccount }) {
+  // const [ loggedin, userId ] = useIsLoggedIn()
 
-  const updateAccount = (id) => {
-    setAccount(id)
-    setActiveButton(id)
-  }
+  // console.log(`Parent Update Account: ${updateAccount}`)
 
-  console.log(`Parent Update Account: ${updateAccount}`)
-
-  if(data) {
+  if(accountData) {
     return (
       <div>
-        <TransactionTable accountId={1} account={account} >
-          <TransactionToggleMenu accounts={data} activeButton={activeButton} updateAccount={updateAccount} />
+        <TransactionTable accountId={109} account={account} >
+          <TransactionToggleMenu accounts={accountData} activeButton={activeButton} updateAccount={updateAccount} />
         </TransactionTable>
-        <TransactionTable accountId={2} account={account} >
-          <TransactionToggleMenu accounts={data} activeButton={activeButton} updateAccount={updateAccount} />
+        <TransactionTable accountId={110} account={account} >
+          <TransactionToggleMenu accounts={accountData} activeButton={activeButton} updateAccount={updateAccount} />
         </TransactionTable>
       </div>
     );  

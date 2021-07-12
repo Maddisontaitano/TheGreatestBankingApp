@@ -1,11 +1,13 @@
 import transactionsStyles from "../../styles/pages/Transactions.module.css";
 import React from 'react'
+import { useAccount } from "@/lib/swr-hooks";
 
-const Balance = () => {
+const Balance = (props) => {
+    const { account } = useAccount(props.accountId)
     return (
         <div className={`${transactionsStyles.containerB} ${transactionsStyles.containerC}`}>
-            <p>Current Balance</p>     
-            <h2 className={transactionsStyles.balanceAmount}>$0</h2>
+            <p>Account Balance</p>     
+            <h2 className={transactionsStyles.balanceAmount}>${account}</h2>
             <hr />
             <div className={transactionsStyles.accountBalanceContainer}>
                 <h3 className={transactionsStyles.accountBalance}>Account Balance:</h3>

@@ -8,7 +8,8 @@
 
     flex-direction: column;
 
-    width: 40%;
+    width: 40vw;
+    color: #cfddfc;
 }
 
 .containerC {
@@ -30,11 +31,28 @@
 
 .tableContainer {
     background-color: #78a2f3;
-    border-radius: 10px;
+    border-radius: 0;
+
+    min-height: 82vh;
+
+    overflow-y: hidden;
 }
 
 .tableHeader, .tableFooter {
     height: 4vw;
+    background-color: #78a2f3;
+}
+
+.tableFooter {
+    display: flex;
+    flex-direction: column;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.tableHeader {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .tableHeaderA{
@@ -74,16 +92,16 @@
 .table {
     table-layout: fixed;
     width: 100%;
-    
+
     border-radius: 10px;
 }
 
-.type {
+.typeExpense, .typeRevenue {
     position: relative;
     width: 58px;
 }
 
-.type::before {
+.typeExpense::before, .typeRevenue::before {
     content: "";
     font-size: 40px;
 
@@ -101,10 +119,21 @@
     right: 0;
 
     /* border-radius: 50%; */
-    background-image: url(../../public/transaction-negative.png);
     background-size: cover;
 
     z-index: 100;
+}
+
+.typeExpense::before {
+    background-image: url(../../public/transaction-negative.png);
+}
+
+.typeRevenue::before {
+    background-image: url(../../public/transaction-positive.png);
+}
+
+.typeExpenseHide::before {
+    visibility: hidden;
 }
 
 .table td:nth-of-type(2) {
@@ -154,6 +183,8 @@
     font-size: 4vw;
     margin-top: 0;
 
+    color: #32325d;
+
     padding: 0;
 
     line-height: 4vw;
@@ -184,6 +215,8 @@
 
     padding: 0 1vw;
 
+    width: 100%;
+
     box-sizing: border-box;
 
     position: relative;
@@ -194,4 +227,8 @@
     right: 1vw;
 
     color: #444444;
+}
+
+.extendButton {
+    margin: auto;
 }

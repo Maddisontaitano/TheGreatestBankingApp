@@ -19,6 +19,10 @@ const ToggleChartData = (props) => {
         return `${new Date(new Date().getTime() - (0 * 24 * 60 * 60 * 1000)).getFullYear()}-${new Date(new Date().getTime() - (0 * 24 * 60 * 60 * 1000)).getMonth()+1-months}-${new Date(new Date().getTime() - (0 * 24 * 60 * 60 * 1000)).getDate()}`
     }
 
+    function dateBackYears(years) {
+        return `${new Date(new Date().getTime() - (0 * 24 * 60 * 60 * 1000)).getFullYear()-years}-${new Date(new Date().getTime() - (0 * 24 * 60 * 60 * 1000)).getMonth()+1}-${new Date(new Date().getTime() - (0 * 24 * 60 * 60 * 1000)).getDate()}`
+    }
+
     let currentWeek1 = dateMinusDays(7)
     let currentWeek2 = dateMinusDays(0)
     let lastWeek1 = dateMinusDays(14)
@@ -31,10 +35,10 @@ const ToggleChartData = (props) => {
     let currentQuarter2 = dateMinusDays(0)
     let lastQuarter1 = dateBackMonths(6)
     let lastQuarter2 = dateBackMonths(3)
-    let currentYear1 = dateMinusDays(365)
+    let currentYear1 = dateBackYears(1)
     let currentYear2 = dateMinusDays(0)
-    let lastYear1 = dateMinusDays(730)
-    let lastYear2 = dateMinusDays(365)
+    let lastYear1 = dateBackYears(2)
+    let lastYear2 = dateBackYears(1)
 
     useEffect(() => {
 
@@ -49,16 +53,16 @@ const ToggleChartData = (props) => {
             let value2 = array[1]
             // sliceDate(value1)
             // sliceDate(value2)
-            console.log(value1)
-            console.log(value2)
+            console.log("Value 1 " + value1)
+            console.log("Value 2 " + value2)
             props.pickTimePeriod(value1, value2)
         }
     }, [rangeValue])
 
     return (
         <div className="flex column toggleChartContainer">
-            <PrimaryButton buttonText="Deposits" buttonClick={props.showDeposit} />
-            <PrimaryButton buttonText="Withdrawals" buttonClick={props.showWithdrawl} />
+            <PrimaryButton buttonText="Revenue" buttonClick={props.showDeposit} />
+            <PrimaryButton buttonText="Expenses" buttonClick={props.showWithdrawl} />
             <PrimaryButton buttonText="Projection" buttonClick={props.showPrediction} />
             <select className={dateFormStyles.selectDropDown} value={rangeValue} onChange={(e) => setRangeValue(e.target.value)}>
                 <i class="fas fa-chevron-circle-down"></i>

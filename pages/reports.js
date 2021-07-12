@@ -1,6 +1,20 @@
+/* 
+
+Not in a specific order
+
+1. Get api data to populate into amounts - Tyrell Working on
+2. Map api data into table for pdf
+3. Create specific API to separate revenues and expenses
+4. Change all withdrawals and deposits to expenses and revenues
+5. 
+
+*/
+
+
 import reportsStyles from '../styles/pages/Reports.module.css'
 import dateFormStyles from '../styles/components/DateForm.module.css'
 import { useState } from 'react'
+import { useUserTransactionsDates } from '@/lib/swr-hooks'
 import { Bar, Line } from 'react-chartjs-2'
 import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'
@@ -38,6 +52,8 @@ const reports = () => {
     const [dates, setDates] = useState(dataiod)
     const [startDate, setStartDate] = useState(getCorrectValue(dateMinusDays(7)))
     const [endDate, setEndDate] = useState(getCorrectValue(dateMinusDays(0)))
+    const { data } = useUserTransactionsDates(39, startDate, endDate)
+    console.log(data)
     const [depositNumbers, setDepositNumbers] = useState([1,2,3,4,5,6,7])
     const [withdrawlNumbers, setWithdrawlNumbers] = useState([3,2,5,12,3,10,2])
     const [predictionNumbers, setPredictionNumbers] = useState([6,5,3,3,4,6,7])
@@ -62,17 +78,21 @@ const reports = () => {
     }
 
     function pickTimePeriod(start, end) {
-        console.log('Before pikcTimePeriod: start: ' + start + ' end: ' + end)
+        // console.log('Before pikcTimePeriod: start: ' + start + ' end: ' + end)
+        setStartDate(start)
+        setEndDate(end)
         const newDates = getTimePeriodDaysArray(start, end)
-        console.log('After pikcTimePeriod: newDates: ' + newDates)
+        // console.log('After pikcTimePeriod: newDates: ' + newDates)
         setDates(newDates)
     }
 
     function handleRangeChange(e) {
         e.preventDefault()
-        console.log('Before handleRangeChange: start: ' + start.value + ' end: ' + end.value)
+        // console.log('Before handleRangeChange: start: ' + start.value + ' end: ' + end.value)
+        setStartDate(start)
+        setEndDate(end)
         const newDates = getDaysArray(start.value, end.value)
-        console.log('After handleRangeChange: newDates: ' + newDates)
+        // console.log('After handleRangeChange: newDates: ' + newDates)
         setDates(newDates)
     }
 
