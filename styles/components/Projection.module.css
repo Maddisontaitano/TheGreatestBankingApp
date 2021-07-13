@@ -1,0 +1,89 @@
+.background{
+    position: fixed;
+    margin: 0;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(83, 83, 83);
+    opacity: 0.8;
+    z-index: 1200;
+}
+
+.container{
+    position: fixed;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    height: fit-content;
+    width: 30vw;
+    padding: 2vh 2vw 4vh 2vw;
+    text-align: center;
+    justify-content:flex-start;
+    background-color: #668be6;
+    color: #32325d;
+    z-index: 1400;
+}
+
+.container div {
+    margin-top: 3.4vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container h2 {
+    font-size: 3vw;
+    line-height: 3vw;
+    font-weight: 500;
+}
+
+.container h3 {
+    font-size: 1.8vw;
+    line-height: 1.8vw;
+}
+
+.container p {
+    font-size: 1.3vw;
+    line-height: 1.3vw;
+    margin-top: 1.7vh;
+
+    width: 25vw;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container button {
+    /* margin-left: auto;
+    margin-right: auto; */
+}
+
+.button {
+    padding: 1vh 1.5vw;
+    text-transform: uppercase;
+
+    position: relative;
+
+    top: 0;
+
+    font-weight: 500;
+
+    border-radius: 3px;
+
+    transition: top .15s;
+
+    color: #6772e5;
+    background-color: #ffffff;
+
+    box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
+}
+
+.month3{
+    margin-right: .5vw;
+}
+
+.month6{
+    margin-left: .5vw;
+}

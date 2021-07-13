@@ -1,6 +1,7 @@
 import navStyles from '../../styles/global/Nav.module.css'
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
+import router from 'next/router'
 import { useIsLoggedIn } from '@/lib/swr-hooks'
 
 const Nav = () => {
@@ -42,7 +43,7 @@ const Nav = () => {
         if (loggedin) {
             document.cookie = 'user=; Max-Age=0; path=/;';
             // alert('User Logged Out');
-            location.reload()
+            router.push('/')
          } else {
             return;
          }
@@ -54,7 +55,7 @@ const Nav = () => {
                 {/* <img src='https://i.ibb.co/xszpynb/favicon.png' alt='bank'></img> */}
                 {/* <img src='https://i.ibb.co/LZdfPsd/account.png' alt='user'></img> */}
                 {!loggedin ? <li className={navStyles.title}><Link href='/'>Ark</Link></li> : <></>}
-                {loggedin ? <li className={navStyles.title}><Link href='/transactions'>Ark</Link></li> : <></>}
+                {loggedin ? <li className={navStyles.title}><Link href={`/user/${userId}`}>Ark</Link></li> : <></>}
                 {/* {<li className={navStyles.title}><Link href='/'>Ark</Link></li>} */}
                 {/* <li><Link href='/'>Home</Link></li> */}
                 <li><Link href='/transactions'>Transactions</Link></li>

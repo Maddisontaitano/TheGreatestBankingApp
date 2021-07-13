@@ -12,12 +12,12 @@ const BalanceSkeleton = (props) => {
                 <h2 className={transactionsStyles.balanceAmount}><Skeleton width={160}/></h2>
                 <hr />
                 <div className={transactionsStyles.accountBalanceContainer}>
-                    <h3 className={transactionsStyles.accountBalance}><Skeleton width={120}/></h3>
-                    <p><Skeleton width={40}/></p>
+                    <h3 className={transactionsStyles.accountBalance}><Skeleton width={50}/></h3>
+                    <p><Skeleton width={80}/></p>
                 </div>
                 <div className={transactionsStyles.accountBalanceContainer}>
-                    <h3 className={transactionsStyles.accountBalance}><Skeleton width={120}/></h3>
-                    <p><Skeleton width={40}/></p>
+                    <h3 className={transactionsStyles.accountBalance}><Skeleton width={55}/></h3>
+                    <p><Skeleton width={20}/></p>
                 </div>
             </SkeletonTheme>
         </div>

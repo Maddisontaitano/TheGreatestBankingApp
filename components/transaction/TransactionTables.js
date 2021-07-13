@@ -1,13 +1,15 @@
 import TransactionTable from './TransactionTable'
 
-function TransactionTables({ accounts, account }) {
+import TransactionToggleMenu from './TransactionToggleMenu';
+
+function TransactionTables({ accounts, account, activeButton, updateAccount }) {
   if (accounts) {
     return (
       <div>
         {accounts.map((e) => (
-          <div key={e.accountId} className="py-2">
-            <TransactionTable accountId={e.accountId} account={account} />
-          </div>
+          <TransactionTable key={e.accountId} accountId={e.accountId} account={account} >
+            <TransactionToggleMenu accounts={accounts} activeButton={activeButton} updateAccount={updateAccount} />
+          </TransactionTable>
         ))}
       </div>
     )
@@ -16,4 +18,4 @@ function TransactionTables({ accounts, account }) {
   }
 }
 
-export default Accounts
+export default TransactionTables;

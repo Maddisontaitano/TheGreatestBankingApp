@@ -3,11 +3,11 @@
     min-height: 78%;
     height: auto;
     width: 70%;
-    background-color: white ;
     top: 8rem;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    color: #32325d;
 }
 
 .add {
@@ -30,22 +30,19 @@
     font-size: 2rem;
     margin: 2rem;
     transition: 0.1s ease;
+    background-color: #78a2f3;
+    text-align: left;
 }
 
 .card:hover {
     transform: scale(1.05);
-    box-shadow: 5px 5px 5px rgb(179, 179, 179);
+    box-shadow: 5px 5px 5px #0039aa;
 }
 
 .username {
     margin: 1rem;
     text-align: center;
-}
-
-.type {
-    font-size: 1.25rem;
-    margin: 1rem;
-    text-align: center;
+    font-weight: 700;
 }
 
 .balance {
@@ -65,9 +62,12 @@
 }
 
 .edit {
-    position: relative;
     cursor: pointer;
+    font-size: 1.25rem;
     margin: 1rem;
-    margin-top: 5rem;
     text-align: center;
+}
+
+.cursor {
+    cursor: default;
 }

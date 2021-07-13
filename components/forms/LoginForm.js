@@ -45,12 +45,13 @@ export default function EntryForm() {
       if (data.success) {
         setloginSucces("Succesfully Logged In")//Setting a succes message is login was succesfull
         document.cookie = `user=${data.userId}; ${expiryDate}; path=/;`;
-        Router.push('/transactions')
+        Router.push({
+          pathname: `/user/${data.userId}`,
+          query: { message: "You've successfully logged in, welcome to ArkBank"}
+        })
       } else {
         setloginSucces("Wrong Username / Password");//Setting a succes message is login was succesfull
       }
-      console.log(data)
-      // console.log(json.results[0].pass);
       // Router.push('/')
     } catch (e) {
       console.log(e.message)
@@ -101,7 +102,6 @@ export default function EntryForm() {
           Forgot Password?
         </Link>
       </div>
-      <p>{loginSucces}</p>
     </form>
   )
 }

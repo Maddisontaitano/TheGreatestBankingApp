@@ -24,6 +24,7 @@
 
 .nav ul li:first-child {
     margin-right: auto;
+    font-weight: 700;
 }
 
 .nav ul li:last-child {

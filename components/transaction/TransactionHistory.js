@@ -3,21 +3,23 @@ import { useState } from "react";
 import { useAccounts, useAccountsTransactionTable, useIsLoggedIn } from "@/lib/swr-hooks";
 import TransactionTable from './TransactionTable'
 import TransactionToggleMenu from './TransactionToggleMenu'
+import TransactionTables from "./TransactionTables";
 
-function TransactionHistory ({ accountData, account, activeButton, updateAccount }) {
+function TransactionHistory ({ accounts, account, activeButton, updateAccount }) {
   // const [ loggedin, userId ] = useIsLoggedIn()
 
   // console.log(`Parent Update Account: ${updateAccount}`)
 
-  if(accountData) {
+  if(accounts) {
     return (
       <div>
-        <TransactionTable accountId={109} account={account} >
+        <TransactionTables accounts={accounts} account={account} activeButton={activeButton} updateAccount={updateAccount} />
+        {/* <TransactionTable accountId={109} account={account} >
           <TransactionToggleMenu accounts={accountData} activeButton={activeButton} updateAccount={updateAccount} />
         </TransactionTable>
         <TransactionTable accountId={110} account={account} >
           <TransactionToggleMenu accounts={accountData} activeButton={activeButton} updateAccount={updateAccount} />
-        </TransactionTable>
+        </TransactionTable> */}
       </div>
     );  
   } else {

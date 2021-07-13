@@ -20,6 +20,8 @@
     display: inline-block;
     width: 100%;
 
+    min-width: 30vw;
+
     margin: 0;
     padding: .8vh .8vw;
 

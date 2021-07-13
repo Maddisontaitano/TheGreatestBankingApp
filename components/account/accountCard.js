@@ -6,12 +6,13 @@ import Container from '../global/Container'
 
 const accountCard = (props) => {
     return (
-            <div key={props.i}>
-                <div className={accountsStyles.card} id={props.id}>
-                <div className={accountsStyles.username}>{props.name}</div>
-                <div className={accountsStyles.type}>{props.type}</div>
-                <div className={accountsStyles.balance}>{props.balance}</div>
-                <div className={accountsStyles.edit} onClick={() => props.editAccount()}>Edit</div>
+            <div key={props.accountId}>
+                <div className={accountsStyles.card} id={props.accountId}>
+                <div className={accountsStyles.username}>{props.bank_name}</div>
+                { props.nickname 
+                ? <div className={`${accountsStyles.edit} ${accountsStyles.cursor}`} >{props.nickname}</div> 
+                : <div className={accountsStyles.edit} onClick={() => props.editAccount()}>Add Nickname</div>}
+                <div className={accountsStyles.balance}>Balance: {props.balance}</div>
             </div>
         </div>
     )

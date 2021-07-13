@@ -12,15 +12,15 @@ const TransactionTable = (props) => {
     const extendTable = (val) => {
         setTableHeight(val += 82)
     }
-    const shrinkTable = (val) => {
-        if(val > 82) {
-            setTableHeight(val -= 82)
-        } else return
-    }
+
+    console.log("IMPORTANT")
+    console.log(props.accountId)
+    console.log(props.account)
+    console.log("IMPORTANT")
     if(transactions) {
         if(props.accountId == props.account) {
             return (
-                <div className={transactionsStyles.containerB} id={props.id}>
+                <div className={transactionsStyles.containerB} id={props.accountId}>
                         {props.children}                    
                     <div style={{maxHeight: `${tableHeight}vh`}} className={transactionsStyles.tableContainer}>
                             {/* {props.children}                     */}
@@ -29,7 +29,6 @@ const TransactionTable = (props) => {
                     </div>    
                     <div className={transactionsStyles.tableFooter}>
                         <button className={transactionsStyles.extendButton} onClick={() => extendTable(tableHeight)}>See more items</button>
-                        <button className={transactionsStyles.extendButton} onClick={() => shrinkTable(tableHeight)}>See less items</button>
                     </div>
                 </div>
             )

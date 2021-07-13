@@ -32,17 +32,17 @@ async function query(q) {
 async function migrate() {
   try {
     await query(`
-    INSERT INTO transactions (accountId, description, transactionType, cost, userId, date, plaidId) 
-      VALUES (110, "Starbucks", "Expense", 17.52, 39, "2021-07-09", "sadfjlkhsfdioyu")
+    UPDATE accounts SET nickname = "daniel" WHERE accountId = 72
     `)
     // Can run queries to test mySQL here
     // console.log('*******')
     // console.log(await query('SELECT * FROM users'))
     // console.log('*******')
-    console.log(await query('SELECT * FROM accounts ORDER BY accountId DESC LIMIT 10'))
+    // console.log(await query('SELECT * FROM accounts ORDER BY accountId DESC LIMIT 10'))
+    console.log(await query('SELECT * FROM accounts WHERE accountId = 72'))
     // console.log('*******')
-    console.log(await query('SELECT * FROM transactions ORDER BY transactionId ASC LIMIT 10'))
-    console.log(await query('SELECT * FROM users ORDER BY userId DESC LIMIT 10'))
+    // console.log(await query('SELECT * FROM transactions ORDER BY transactionId ASC LIMIT 10'))
+    // console.log(await query('SELECT * FROM users ORDER BY userId DESC LIMIT 10'))
     // console.log(await query(`SELECT date, cost FROM transactions WHERE date >= "2020-03-12" AND date <= "2020-07-12" AND accountId = 107`))
     // console.log(await query(`SELECT cost FROM transactions WHERE transactionType = "Revenue" AND accountId = 107`))
     // console.log(await query('SELECT * FROM entries'))

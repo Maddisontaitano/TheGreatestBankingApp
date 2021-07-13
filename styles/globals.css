@@ -140,8 +140,9 @@ body {
 }
 
 .success {
-  background-color: #81e986;
-  border: 3px solid #58af50;
+  color: #c0ecfe95;
+  background-color: #78a2f3;
+  border: 3px solid #6587cc;
 }
 
 .closeFlashMessageButton {
@@ -174,15 +175,20 @@ body {
 }
 
 .success > .closeFlashMessageButton {
-  color: #6cc264;
+  color: #6e92da;
 }
 
 .success > .closeFlashMessageButton:hover {
-  color: #58af50;
+  color: #6587cc;
 }
 
 .displayNone {
   display: none;
+}
+
+.loadingStyles {
+  width: 10vw;
+  height: 10vw;
 }
 
 a {

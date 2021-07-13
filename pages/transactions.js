@@ -2,25 +2,29 @@ import React, { useState, useEffect } from "react";
 import transactionsStyles from "../styles/pages/Transactions.module.css";
 import TransactionHistory from "../components/transaction/TransactionHistory";
 import Balance from "../components/transaction/Balance";
-import Skeleton from 'react-loading-skeleton'
+import Skeleton from 'react-loading-skeleton';
 import BalanceSkeleton from "../components/transaction/Skeletons/BalanceSkeleton";
-import router from 'next/router'
-import { useAccounts, useAccountsTransactionTable, useIsLoggedIn, useUserTransactions } from "@/lib/swr-hooks";
+import router from 'next/router';
+import { useAccounts, useAccountsTransactionTable, useIsLoggedIn, useUser, useUserTransactions } from "@/lib/swr-hooks";
 
 const transactions = () => {      
-    // Getting user transaction data Step #3
-  const { userData } = useUserTransactions(39)
-  const { data, defaultValue, isLoad } = useAccountsTransactionTable(39);
-  const [ account, setAccount ] = useState(109);
-  const [ activeButton, setActiveButton ] = useState(109);
-  const {loggedin, userId} = useIsLoggedIn()
-
+  const {loggedin, userId} = useIsLoggedIn();
   useEffect(() => {
     !loggedin ? router.push({
                 pathname: '/login',
                 query: { message: "Login or signup to access bank transactions for free!"}
                 }) : ''
   }, [])
+  const { userData } = useUserTransactions(userId)
+  const { data, isLoad } = useAccountsTransactionTable(userId);
+  // console.log(data ? data[0].accountId : null)
+  const [account, setAccount ] = useState(null)
+  const [ activeButton, setActiveButton ] = useState(null);
+  useEffect(()=> {
+    data ? setAccount(data[0].accountId) : null
+    data ? setActiveButton(data[0].accountId) : null
+  }, [data])
+  const { user } = useUser(userId);
 
   const updateAccount = (id) => {
     if(account !== id && activeButton !== id) {
@@ -29,11 +33,11 @@ const transactions = () => {
     } else return;
   }
 
-  if(userData && data && account && activeButton) {
-    return (
+  if(userData && data && account && activeButton && loggedin) {
+  return (
       <div className={transactionsStyles.containerA}>
-        <Balance accountId={account}/>
-        <TransactionHistory accountData={data} account={account} activeButton={activeButton} updateAccount={updateAccount} />
+        <Balance accountId={account} username={`${user.fname} ${user.lname}`} userId={userId}/>
+        <TransactionHistory accounts={data} account={account} activeButton={activeButton} updateAccount={updateAccount} />
       </div>
     );
   } else return (

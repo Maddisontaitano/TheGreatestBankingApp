@@ -16,7 +16,7 @@ Not in a specific order
 import reportsStyles from '../styles/pages/Reports.module.css'
 import dateFormStyles from '../styles/components/DateForm.module.css'
 import { useState, useEffect } from 'react'
-import { useUserTransactionsDates, useIsLoggedIn } from '@/lib/swr-hooks'
+import { useUserTransactionsDates, useUserTransactionOneYearAvg, useIsLoggedIn } from '@/lib/swr-hooks'
 import { Bar, Line } from 'react-chartjs-2'
 import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'
@@ -25,12 +25,11 @@ import DualButton from '../components/global/DualButton'
 import SecondaryButton from '../components/global/SecondaryButton'
 import ToggleChartData from '../components/reports/ToggleChartData'
 import Transactions from '../components/reports/Transactions'
+import ProjectionOverlay from '../components/reports/ProjectionOverlay'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import router from 'next/router'
 
 const reports = () => {
-    
-    console.log()
 
     const getDaysArray = (start, end) => {
         let arr = [];   
@@ -50,16 +49,24 @@ const reports = () => {
         return arr;
     };
 
+    function dateBackYears(years) {
+        return `${new Date(new Date().getTime() - (0 * 24 * 60 * 60 * 1000)).getFullYear()-years}-${new Date(new Date().getTime() - (0 * 24 * 60 * 60 * 1000)).getMonth()+1}-${new Date(new Date().getTime() - (0 * 24 * 60 * 60 * 1000)).getDate()}`
+    }
+
     const dataiod = getDaysArray(getCorrectValue(dateMinusDays(7)), getCorrectValue(dateMinusDays(0)))
 
     const [ChartType, changeChartType] = useState(Bar)
     const [isFormToggled, toggleForm] = useState(false)
     const [dates, setDates] = useState(dataiod)
+    const {loggedin, userId} = useIsLoggedIn()
     const [startDate, setStartDate] = useState(getCorrectValue(dateMinusDays(7)))
     const [endDate, setEndDate] = useState(getCorrectValue(dateMinusDays(0)))
-    const { data } = useUserTransactionsDates(39, startDate, endDate)
+    const [customStartDate, setCustomStartDate] = useState(getCorrectValue(dateMinusDays(7)))
+    const [customEndDate, setCustomEndDate] = useState(getCorrectValue(dateMinusDays(0)))
+    const { data } = useUserTransactionsDates(userId, startDate, endDate)
+    const { average } = useUserTransactionOneYearAvg(userId, dateBackYears(1), dateMinusDays(0))
     const [activeChart, setActiveChart] = useState("Revenues")
-    const {loggedin, userId} = useIsLoggedIn()
+    const [isProjection, setProjection] = useState(false)
 
     useEffect(() => {
         !loggedin ? router.push({
@@ -67,10 +74,6 @@ const reports = () => {
                     query: { message: "Login or signup to create free reports!"}
                     }) : ''
       }, [])
-    
-    console.log("ACTIVE CHART")
-    console.log(activeChart)
-    
 
     const newGetDaysArray = function(start, end) {
         let arr= []
@@ -82,12 +85,11 @@ const reports = () => {
 
     function getData(type) {
         const newDates = newGetDaysArray(new Date(startDate),new Date(endDate)).map((v)=>v.toISOString().slice(0,10));
-        console.log(newDates)
         let result = []
         if(data) {
             if (type === "Revenues") {
                 newDates.forEach(currentDate => {
-                    let found = 0;
+                    let found = null;
                     data.revenues.forEach(element => {
                         if(element.date === currentDate){
                             found = element.cost
@@ -98,7 +100,7 @@ const reports = () => {
                 })
             } else if (type === "Expenses") {
                 newDates.forEach(currentDate => {
-                    let found = 0;
+                    let found = null;
                     data.expenses.forEach(element => {
                         if(element.date === currentDate){
                             found = element.cost
@@ -109,64 +111,64 @@ const reports = () => {
                 })
             }
         }
-        console.log(result)
         return result
     }
-
-    // function setExpenses() {
-    //     console.log("WORKING")
-    //     let arr = [];
-    //     if(data) {
-    //         if(data.all.length) {
-    //             for(let i = 0; i < data.expenses.length; i++) {
-    //                 arr.push(data.expenses[i].cost)
-    //             }
-    //         }
-    //         console.log(arr)
-    //         setExpenseNumbers(arr)
-    //     }
-    //     if(activeChart === "Expenses") {
-    //         showExpense();    
-    //     }
-    // }
-
-    // function setInitialExpenses() {
-    //     console.log("WORKING")
-    //     let arr = [];
-    //     if(data) {
-    //         if(data.all.length) {
-    //             for(let i = 0; i < data.expenses.length; i++) {
-    //                 arr.push(data.expenses[i].cost)
-    //             }
-    //         }
-    //         console.log(arr)
-    //         return arr;
-    //     }
-    // }
-
-    // function setInitialRevenues() {
-    //     console.log("WORKING")
-    //     let arr = [];
-    //     if(data) {
-    //         if(data.all.length) {
-    //             for(let i = 0; i < data.revenues.length; i++) {
-    //                 arr.push(data.revenues[i].cost)
-    //             }
-    //         }
-    //         console.log(arr)
-    //         return arr;
-    //     }
-    // }
-    // const initialRevenueNumbers = getData("Revenues")
-    // const initialExpenseNumbers = getData("Expenses")
     
     const [revenueNumbers, setRevenueNumbers] = useState(null)
     const [expenseNumbers, setExpenseNumbers] = useState(null)
-    const [projectionNumbers, setProjectionNumbers] = useState([6,5,3,3,4,6,7])
+    const [projectionNumbers, setProjectionNumbers] = useState(null)
     const [chartState, setChartState] = useState({data: revenueNumbers, label: 'Revenue amount', backgroundColor: 'blue', hoverColorBackground: 'lightblue', borderColor: 'darkBlue'})
     useEffect(()=>{
         setRevenueNumbers(getData("Revenues"))
     },[data])
+
+
+    function dateForwardMonths(months) {
+        let years = 0
+        let month = new Date(new Date().getTime() - (0 * 24 * 60 * 60 * 1000)).getMonth()+(1+months)
+        while (month > 12){
+            month = month - 12
+            years = years + 1
+        }
+        return `${new Date(new Date().getTime() - (0 * 24 * 60 * 60 * 1000)).getFullYear()+years}-${month}-${new Date(new Date().getTime() - (0 * 24 * 60 * 60 * 1000)).getDate()}`
+    }
+
+    function selectProjectionMonth(type) {
+        setProjection(false)
+        let start, end;
+        let result = []
+        if(type === 3) {
+            start = dateForwardMonths(0)
+            end = dateForwardMonths(3)
+        } else if(type === 6){
+            start = dateForwardMonths(0)
+            end = dateForwardMonths(6)
+        }
+        const newDates = newGetDaysArray(new Date(start),new Date(end)).map((v)=>v.toISOString().slice(0,10));
+        const day = new Date().getDate()
+        let newAverage = average * 12
+        newDates.forEach(currentDate => {
+            let found = null;
+                if(currentDate.split('-')[2].toString() === day.toString()){
+                    found = newAverage
+                    newAverage += average
+                }      
+            result.push(found)
+        })
+        setDates(newDates)
+        setProjectionNumbers(result)
+    }
+
+    useEffect(()=> {
+        setChartState({
+            data: projectionNumbers,
+            label: 'Projection amount',
+            backgroundColor: 'pink',
+            hoverColorBackground: 'hotpink',
+            borderColor: 'deeppink'
+        })
+        setActiveChart("Projections")
+    }, [projectionNumbers])
 
     function dateMinusDays(days) {
         return `${new Date(new Date().getTime() - (days * 24 * 60 * 60 * 1000)).getFullYear()}-${new Date(new Date().getTime() - (days * 24 * 60 * 60 * 1000)).getMonth()+1}-${new Date(new Date().getTime() - (days * 24 * 60 * 60 * 1000)).getDate()}`
@@ -194,23 +196,17 @@ const reports = () => {
     }
 
     function pickTimePeriod(start, end) {
-        // console.log('Before pikcTimePeriod: start: ' + start + ' end: ' + end)
-        console.log(typeof startDate)
-        console.log(typeof start)
-        console.log("Start Datesdfa" + startDate)
-        console.log("End Datesafdpo" + endDate)
         const newDates = getTimePeriodDaysArray(start, end)
-        // console.log('After pikcTimePeriod: newDates: ' + newDates)
         setDates(newDates)
     }
 
     function handleRangeChange(e) {
         e.preventDefault()
-        // console.log('Before handleRangeChange: start: ' + start.value + ' end: ' + end.value)
-        setStartDate(start)
-        setEndDate(end)
+        setCustomStartDate(start.value)
+        setCustomEndDate(end.value)
+        setStartDate(start.value)
+        setEndDate(end.value)
         const newDates = getDaysArray(start.value, end.value)
-        // console.log('After handleRangeChange: newDates: ' + newDates)
         setDates(newDates)
     }
 
@@ -244,16 +240,16 @@ const reports = () => {
         setActiveChart("Expenses")
     }, [expenseNumbers])
 
-    const showProjection = () => {
-        setChartState({
-            data: projectionNumbers,
-            label: 'Projection amount',
-            backgroundColor: 'pink',
-            hoverColorBackground: 'hotpink',
-            borderColor: 'deeppink'
-        })
-        setActiveChart("Projections")
-    }
+    // const showProjection = () => {
+    //     setChartState({
+    //         data: projectionNumbers,
+    //         label: 'Projection amount',
+    //         backgroundColor: 'pink',
+    //         hoverColorBackground: 'hotpink',
+    //         borderColor: 'deeppink'
+    //     })
+    //     setActiveChart("Projections")
+    // }
 
     const cycleChart = () => {
         if(ChartType === Bar) {
@@ -277,7 +273,8 @@ const reports = () => {
       }
 
     const generatePDF = async () => {
-        const doc = new jsPDF();
+        if(activeChart == "Revenues" || activeChart == "Expenses") {
+            const doc = new jsPDF();
 
         doc.setProperties({
             title: "test-pdf"
@@ -336,7 +333,6 @@ const reports = () => {
                     },
                     // Needed to set column 2 header to halign right
                     willDrawCell: (hookData) => {
-                        console.log(hookData)
                         if(hookData.column.dataKey === 2) {
                             hookData.cell.styles.halign = "right";
                         }
@@ -344,57 +340,13 @@ const reports = () => {
                 })
                 doc.output('save');
             })
-        // doc.autoTable({
-        //     html: '#myTable',
-        //     theme: 'grid',
-        //     columnDef: [
-        //         { title: "date", dataKey: "date" },
-        //         { title: "description", dataKey: "description" },
-        //         { title: "amount", dataKey: "amount" },
-        //     ],
-        //     tableWidth: tableWidth,
-        //     startY: 110,
-        //     margin: { top: 20, left: tableMargin, right: tableMargin },
-        //     headStyles: {
-        //         lineColor: lineColor,
-        //         lineWidth: .1,
-        //         fillColor: '#78a2f3',
-        //     },
-        //     styles: {
-        //         lineColor: lineColor,
-        //     },
-        //     columnStyles: { 
-        //         0: { 
-        //             fillColor: '#ffffff',
-        //             halign: "left",
-        //             cellWidth: 23
-        //         },
-        //         1: { 
-        //             fillColor: '#ffffff',
-        //             halign: "left",
-        //         },
-        //         2: { 
-        //             fillColor: '#ffffff',
-        //             cellWidth: 25
-        //         }
-        //     },
-        //     // Needed to set column 2 header to halign right
-        //     willDrawCell: (hookData) => {
-        //         console.log(hookData)
-        //         if(hookData.column.dataKey === 2) {
-        //             hookData.cell.styles.halign = "right";
-        //         }
-        //     }
-        // })
-        // // Converting chart to image
+        }
+        
     }
     if(data) {
-        if(data.all.length) {
-            console.log(data.all[0].cost)
-        }
-        // console.log(data.all)
         return (
             <div className={reportsStyles.main}>
+                { isProjection ? <ProjectionOverlay month3={() => selectProjectionMonth(3)} month6={() => selectProjectionMonth(6)} exit={() => setProjection(false)}/> : null}
                 <div className={`${reportsStyles.topContainer} flex row`}>
                     <div id='chart' className={reportsStyles.chartSize}>
                         <ChartType
@@ -408,7 +360,8 @@ const reports = () => {
                                         backgroundColor: chartState.backgroundColor ,
                                         hoverBackgroundColor: chartState.hoverBackgroundColor ,
                                         borderColor: chartState.borderColor ,
-                                        borderWidth: 2
+                                        borderWidth: 2,
+                                        spanGaps: true
                                     }
                                 ],
                             }}
@@ -444,15 +397,13 @@ const reports = () => {
                         />
                     </div>
                         <ToggleChartData showRevenue={showRevenue} showExpense={showExpense} 
-                        showProjection={showProjection} pickTimePeriod={pickTimePeriod} 
+                        showProjection={() => setProjection(true)} pickTimePeriod={pickTimePeriod} 
                         customOn={() => toggleForm(true)} customOff={() => toggleForm(false)} 
                         setStart={setStart} setEnd={setEnd} > 
                             {isFormToggled ?
-                                    <form className={dateFormStyles.rangeForm} onSubmit={handleRangeChange}>
-                                        {/* <label htmlFor="start">From: </label> */}
-                                        <input className={dateFormStyles.dateInput} id="start" name="start" type='date' value={startDate} onChange={({value}) => {setStartDate(value); console.log(startDate)}} /><br/>
-                                        {/* <label htmlFor="end">To: </label> */}
-                                        <input className={dateFormStyles.dateInput} id="end" name="end" type='date' value={endDate} onChange={({value}) => setEndDate(value)}/><br/>
+                                    <form className={dateFormStyles.rangeForm} onSubmit={handleRangeChange}> 
+                                        <input className={dateFormStyles.dateInput} id="start" name="start" type='date' value={customStartDate} onChange={({value}) => {setCustomStartDate(value)}} /><br/>
+                                        <input className={dateFormStyles.dateInput} id="end" name="end" type='date' value={customEndDate} onChange={({value}) => {setCustomEndDate(value)}}/><br/>
                                         <SecondaryButton buttonText="Apply"></SecondaryButton>
                                     </form>
                                     : null
@@ -471,7 +422,8 @@ const reports = () => {
                         </tr>
                     </thead>
                     {/* <Transactions transactions={data.all} /> */}
-                    {activeChart == "Revenues" ? <Transactions transactions={data.revenues} /> : <Transactions transactions={data.expenses} /> }
+                    {activeChart == "Revenues" ? <Transactions transactions={data.revenues} /> : <></> }
+                    {activeChart == "Expenses" ? <Transactions transactions={data.expenses} /> : <></> }
                 </table>
             </div>
         )

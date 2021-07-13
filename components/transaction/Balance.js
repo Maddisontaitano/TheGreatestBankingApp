@@ -10,12 +10,12 @@ const Balance = (props) => {
             <h2 className={transactionsStyles.balanceAmount}>${account}</h2>
             <hr />
             <div className={transactionsStyles.accountBalanceContainer}>
-                <h3 className={transactionsStyles.accountBalance}>Account Balance:</h3>
-                <p>$757.29</p>
+                <h3 className={transactionsStyles.accountBalance}>Name</h3>
+                <p>{props.username}</p>
             </div>
             <div className={transactionsStyles.accountBalanceContainer}>
-                <h3 className={transactionsStyles.accountBalance}>Account Balance:</h3>
-                <p>$100.00</p>
+                <h3 className={transactionsStyles.accountBalance}>User Id</h3>
+                <p>{props.userId}</p>
             </div>
         </div>
     )

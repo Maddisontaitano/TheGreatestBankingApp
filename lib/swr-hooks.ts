@@ -33,19 +33,8 @@ export function useAccountsTransactionTable(id: string) {
   console.log("**** Account Data ****")
   console.log(data)
   console.log("**** Account Data ****")
-
-  function getData(data) {
-    if(data) {
-      console.log(data[0].accountId)
-      return data[0].accountId
-    }
-  }
-  const defaultValue = getData(data)
-  console.log(defaultValue)
-
   return {
     data: data,
-    defaultValue: defaultValue,
     isLoad: !error && !data,
     isError: error,
   }
@@ -92,6 +81,19 @@ export function useUserTransactionsDates(id: string, startDate: string, endDate:
   }
 }
 
+export function useUserTransactionOneYearAvg(id: string, startDate: string, endDate: string) {
+  console.log(`${id} ${startDate} ${endDate}`)
+  console.log(`/api/transactions/get-user-transactions-avg?id=${id}&startDate=${startDate}&endDate=${endDate}`)
+  const { data, error } = useSWR(`/api/transactions/get-user-transactions-avg?id=${id}&startDate=${startDate}&endDate=${endDate}`, fetcher)
+  console.log(data) 
+
+  return {
+    average: data,
+    isLoad: !error && !data,
+    isError: error,
+  }
+}
+
 // export function useForgotPassword(email: string) {
 //   const { data, error } = useSWR(`/api/forgot-password?email=${email}`, fetcher);
 
@@ -103,7 +105,7 @@ export function useUserTransactionsDates(id: string, startDate: string, endDate:
 // }
 
 export function useUser(id: string) {
-  const { data, error } = useSWR(`/api/get-user?id=${id}`, fetcher) // this api still needs to be setup
+  const { data, error } = useSWR(`/api/users/get-user?id=${id}`, fetcher) // this api still needs to be setup
   console.log("**** User Data ****")
   console.log(data)
   console.log("**** User Data ****")

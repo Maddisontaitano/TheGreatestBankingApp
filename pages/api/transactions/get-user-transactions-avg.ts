@@ -23,24 +23,19 @@ const handler: NextApiHandler = async (req, res) => {
         id
     )   
 
-    const expenses = await query(`SELECT date, cost, description, transactionType, transactionId FROM transactions WHERE date >= "${startDate}" AND date <= "${endDate}" AND transactionType = "Expense" AND userId = ${id} ORDER BY date DESC`)
-    const revenues = await query(`SELECT date, cost, description, transactionType, transactionId FROM transactions WHERE date >= "${startDate}" AND date <= "${endDate}" AND transactionType = "Revenue" AND userId = ${id} ORDER BY date DESC`)
+    const expenses = await query(`SELECT date, cost, description, transactionType, transactionId FROM transactions WHERE transactionType = "Expense" AND userId = ${id} ORDER BY date DESC`)
+    const revenues = await query(`SELECT date, cost, description, transactionType, transactionId FROM transactions WHERE transactionType = "Revenue" AND userId = ${id} ORDER BY date DESC`)
     const totalExpenses = getTotal(expenses)
     const totalRevenues = getTotal(revenues)
     // getTotal(revenues)
     const balance = totalRevenues - totalExpenses;
-    
-    console.log("BALANCE")
+    const average = balance/12;
+    console.log(id)
     console.log(balance)
-    console.log("BALANCE")
-    const data = {
-      all: results,
-      expenses: expenses,
-      revenues: revenues,
-      balance: balance
-    }
-    console.log(data)
-    return res.json(data)
+    console.log("***AVERAGE***")
+    console.log(average)
+    console.log("***AVERAGE***")
+    return res.json(average)
     } catch (e) {
     res.status(500).json({ message: e.message })
     }
