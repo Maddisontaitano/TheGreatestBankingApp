@@ -2,7 +2,9 @@ import styles from '../../styles/components/Form.module.css'
 
 import { useState } from 'react'
 import Router from 'next/router'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
+import FlashMessage from '../../components/flash/FlashMessage'
 
 import Button from '../global/Button'
 
@@ -11,6 +13,11 @@ export default function EntryForm() {
   const [pass, setPass] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [loginSucces, setloginSucces] = useState('')
+  const router = useRouter()
+  const message = router.query.message?.toString()
+  // window.history.replaceState(null, '', '/login')
+  // router.replace("/login", undefined, { shallow: true });
+
 
   async function submitHandler(e) {
     setSubmitting(true)
@@ -38,7 +45,7 @@ export default function EntryForm() {
       if (data.success) {
         setloginSucces("Succesfully Logged In")//Setting a succes message is login was succesfull
         document.cookie = `user=${data.userId}; ${expiryDate}; path=/;`;
-        Router.push('/')
+        Router.push('/transactions')
       } else {
         setloginSucces("Wrong Username / Password");//Setting a succes message is login was succesfull
       }
@@ -52,6 +59,9 @@ export default function EntryForm() {
 
   return (
     <form className={styles.formContainer} onSubmit={submitHandler}>
+      {message ? <FlashMessage type="error" message={message} /> : <></>}
+      <h1 className={styles.formHeader}>Welcome to ArkBank</h1>
+      <h2 className={styles.formSubheader}>The #1 most user friendly personal finance management system</h2>
       <div className={styles.inputContainer}>
         <label htmlFor="email">
           <h3 className={styles.label}>Email</h3>
@@ -83,12 +93,14 @@ export default function EntryForm() {
       <Button disabled={submitting} type="submit">
         {submitting ? 'logging in ...' : 'Login'}
       </Button>
-        <br />
-        <br />
-      <Link href='/passwordreset' style={{cursor: 'pointer'}}>
-        Forgot Password
-      </Link>
-
+      <div className={styles.formLinksContainer}>
+        <Link href='/signup' style={{cursor: 'pointer'}}>
+          Need an account? Sign Up
+        </Link>
+        <Link href='/passwordreset' style={{cursor: 'pointer'}}>
+          Forgot Password?
+        </Link>
+      </div>
       <p>{loginSucces}</p>
     </form>
   )

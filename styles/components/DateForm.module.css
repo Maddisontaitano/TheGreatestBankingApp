@@ -1,6 +1,6 @@
 .rangeForm {
     position: absolute;
-    bottom: -18.4vh;
+    bottom: 8.7vh;
 }
 
 .dateInput {
@@ -10,6 +10,8 @@
     font-weight: 500;
 
     padding: 1vh .3vw 1vh .5vw;
+
+    border-radius: 3px;
 
     position: relative;
 }

@@ -31,10 +31,10 @@ async function query(q) {
 // Create "entries" table if doesn't exist
 async function migrate() {
   try {
-    // await query(`
-    // INSERT INTO transactions (accountId, description, transactionType, cost, userId, date, plaidId) 
-    //   VALUES (110, "Birthday Cash", "Revenue", 219.57, 37, "2021-07-08", "sadfjlkhsfdioyu")
-    // `)
+    await query(`
+    INSERT INTO transactions (accountId, description, transactionType, cost, userId, date, plaidId) 
+      VALUES (110, "Starbucks", "Expense", 17.52, 39, "2021-07-09", "sadfjlkhsfdioyu")
+    `)
     // Can run queries to test mySQL here
     // console.log('*******')
     // console.log(await query('SELECT * FROM users'))

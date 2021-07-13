@@ -2,6 +2,7 @@
     width: 40vw;
 
     height: fit-content;
+    /* max-height: 100vh; */
 
     background-color: #ffffff;
 
@@ -89,4 +90,35 @@
     margin-left: 1.3vw;
 
     box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
+}
+
+.containerB {
+    height: 62vh;
+    width: 40vw;
+    background-size: cover;
+    z-index: 1000;
+
+    margin-top: 6vh;
+    margin-left: 5.5vw;
+}
+
+.containerC {
+    height: 28vh;
+    border-radius: 4px;
+    width: 100%;
+    background-image: url(../../../public/homePageTransactions4.png);
+    background-size: cover;
+
+    box-shadow: 0 9px 14px rgb(50 50 93 / 6%), 0 5px 8px rgb(0 0 0 / 8%), inset 0 0px 0 rgb(151 200 255 / 25%);
+}
+
+.containerD {
+    height: 5.6vh;
+    margin-top: 4vh;
+    border-radius: 4px;
+    width: 100%;
+    background-image: url(../../../public/printReportButton.png);
+    background-size: cover;
+
+    box-shadow: 0 9px 14px rgb(50 50 93 / 6%), 0 3px 8px rgb(0 0 0 / 8%), inset 0 2px 0 rgb(151 200 255 / 25%);
 }

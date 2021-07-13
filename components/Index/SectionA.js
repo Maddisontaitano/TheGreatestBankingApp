@@ -17,6 +17,10 @@ const SectionA = () => {
                 <Link href="#" className={sectionStyles.buttonB}>Request a demo</Link>
                </div>
            </div>
+           <div className={sectionStyles.containerB}>
+               <div className={sectionStyles.containerC}></div>
+               <div className={sectionStyles.containerD}></div>
+           </div>
         </div>
     )
 }

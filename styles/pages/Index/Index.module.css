@@ -8,6 +8,8 @@
 
     height: 100vh;
     width: 100vw;
+
+    z-index: 900;
 }
 
 .sectionB {
@@ -15,20 +17,21 @@
 
     background-color: #ffffff;
 
-    height: 200vh;
+    height: 10vh;
     width: 100vw;
 
     /* clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%); */
 }
 
-.sectionB::before {
+.sectionA::before {
     content: "";
     position: absolute;
 
-    top: -180px;
+    bottom: -160px;
+    /* overflow-y: hidden; */
     left: 0;
 
-    height: 100%;
+    height: 50vh;
     width: 100%;
 
     background-color: #f6f9fc;

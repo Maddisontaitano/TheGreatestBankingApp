@@ -1,0 +1,107 @@
+.plaidContainer {
+    background-color: #ffffff;
+    padding: 4vh 1vw;
+
+    border-radius: 10px;
+
+    position: absolute;
+    left: 15vw;
+    top: 23vh;
+
+    height: fit-content;
+}
+
+.plaidImg {
+    height: 40vh;
+    width: 20vw;
+    background-image: url("../../public/plaid.png");
+    background-size: cover;
+}
+
+.plaidContainerRight {
+    margin-left: 1vw;
+}
+
+.plaidContainerRight ul {
+    margin-top: 1.3vh;
+    margin-left: 2.8vw;
+
+    font-size: 1.15vw;
+    font-weight: 500;
+    /* list-style-type:disc; */
+    /* list-style-position: inside; */
+}
+
+.plaidContainer ul li {
+    position: relative;
+}
+
+.plaidContainerRight ul li::before {
+    content: "";
+    font-size: 10px;
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: -29px;
+    width: 20px;
+    height: 20px;
+    /* width: ; */
+    background-image: url(../../public/plaidCheck.png);
+    background-size: cover;
+
+}
+
+.plaidTitleA {
+    margin-top: 2vh;
+    font-size: 2.4vw;
+    font-weight: 500;
+}
+
+.plaidTitleB {
+    font-size: 1.4vw;
+    width: 30vw;
+    font-weight: 500;
+}
+
+.plaidButton {
+    background-color: #000000;
+    font-weight: 500;
+    padding: 1vh 1vw;
+
+    position: relative;
+    margin-top: 2.5vh;
+    color: #ffffff;
+    width: 94%;
+    transition: .15s ease-out;
+}
+
+.plaidButton:active {
+    border: 0 solid transparent;
+    background-color: #0977d1;
+    outline: none;
+}
+
+.plaidButton:focus {
+    border: 0 solid transparent;
+    background-color: #0977d1;
+    outline: none;
+}
+
+.plaidButton:hover {
+    background-color: #0977d1;
+    /* tran */
+}
+
+.plaidButton::before {
+    content: "";
+    font-size: 10px;
+    display: block;
+    position: absolute;
+    top: 10.1px;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    /* width: ; */
+    background-image: url(../../public/plaidButton.png);
+    background-size: cover;
+}

@@ -27,6 +27,21 @@
     margin-right: auto;
 }
 
+.skeletonChartSize {
+    width: 60vw;
+    height: fit-content;
+    font-size: 50vh;
+    color: #2a3decb7;
+
+    position: absolute;
+
+    top: -5vh;
+    left: 11vw;
+
+    /* margin-left: 5vw; */
+    margin-right: auto;
+}
+
 .cycle {
     cursor: pointer;
 }

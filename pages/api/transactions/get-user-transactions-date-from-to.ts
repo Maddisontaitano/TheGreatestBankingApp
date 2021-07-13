@@ -17,14 +17,14 @@ const handler: NextApiHandler = async (req, res) => {
     try {
     const results = await query(
         `
-        SELECT date, cost FROM transactions WHERE date >= "${startDate}" AND date <= "${endDate}" AND userId = ${id}
+        SELECT date, cost, description, transactionType, transactionId FROM transactions WHERE date >= "${startDate}" AND date <= "${endDate}" AND userId = ${id} ORDER BY date DESC
         `
         ,
         id
     )   
 
-    const expenses = await query(`SELECT cost FROM transactions WHERE date >= "${startDate}" AND date <= "${endDate}" AND transactionType = "Expense" AND userId = ${id}`)
-    const revenues = await query(`SELECT cost FROM transactions WHERE date >= "${startDate}" AND date <= "${endDate}" AND transactionType = "Revenue" AND userId = ${id}`)
+    const expenses = await query(`SELECT date, cost, description, transactionType, transactionId FROM transactions WHERE date >= "${startDate}" AND date <= "${endDate}" AND transactionType = "Expense" AND userId = ${id} ORDER BY date DESC`)
+    const revenues = await query(`SELECT date, cost, description, transactionType, transactionId FROM transactions WHERE date >= "${startDate}" AND date <= "${endDate}" AND transactionType = "Revenue" AND userId = ${id} ORDER BY date DESC`)
     const totalExpenses = getTotal(expenses)
     const totalRevenues = getTotal(revenues)
     // getTotal(revenues)

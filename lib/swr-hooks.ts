@@ -81,11 +81,12 @@ export function useAccountTransactions(id: string) {
 // Get all user transactions date from to
 export function useUserTransactionsDates(id: string, startDate: string, endDate: string) {
   console.log(`${id} ${startDate} ${endDate}`)
+  console.log(`/api/transactions/get-user-transactions-date-from-to?id=${id}&startDate=${startDate}&endDate=${endDate}`)
   const { data, error } = useSWR(`/api/transactions/get-user-transactions-date-from-to?id=${id}&startDate=${startDate}&endDate=${endDate}`, fetcher)
   console.log(data) 
 
   return {
-    transactions: data,
+    data: data,
     isLoad: !error && !data,
     isError: error,
   }

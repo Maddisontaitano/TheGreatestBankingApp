@@ -51,19 +51,22 @@ const ToggleChartData = (props) => {
             let array = x.split(" ", 2)
             let value1 = array[0]
             let value2 = array[1]
-            // sliceDate(value1)
+            props.setStart(value1)
+            props.setEnd(value2)
             // sliceDate(value2)
             console.log("Value 1 " + value1)
             console.log("Value 2 " + value2)
+            // props.setRevenues()
+            // props.setExpenses()
             props.pickTimePeriod(value1, value2)
         }
     }, [rangeValue])
 
     return (
         <div className="flex column toggleChartContainer">
-            <PrimaryButton buttonText="Revenue" buttonClick={props.showDeposit} />
-            <PrimaryButton buttonText="Expenses" buttonClick={props.showWithdrawl} />
-            <PrimaryButton buttonText="Projection" buttonClick={props.showPrediction} />
+            <PrimaryButton buttonText="Revenue" buttonClick={props.showRevenue} />
+            <PrimaryButton buttonText="Expenses" buttonClick={props.showExpense} />
+            <PrimaryButton buttonText="Projection" buttonClick={props.showProjection} />
             <select className={dateFormStyles.selectDropDown} value={rangeValue} onChange={(e) => setRangeValue(e.target.value)}>
                 <i class="fas fa-chevron-circle-down"></i>
                 <option disabled selected hidden>Pick a Range</option>

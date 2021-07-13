@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import transactionsStyles from "../styles/pages/Transactions.module.css";
 import TransactionHistory from "../components/transaction/TransactionHistory";
 import Balance from "../components/transaction/Balance";
 import Skeleton from 'react-loading-skeleton'
 import BalanceSkeleton from "../components/transaction/Skeletons/BalanceSkeleton";
+import router from 'next/router'
 import { useAccounts, useAccountsTransactionTable, useIsLoggedIn, useUserTransactions } from "@/lib/swr-hooks";
 
 const transactions = () => {      
@@ -12,6 +13,14 @@ const transactions = () => {
   const { data, defaultValue, isLoad } = useAccountsTransactionTable(39);
   const [ account, setAccount ] = useState(109);
   const [ activeButton, setActiveButton ] = useState(109);
+  const {loggedin, userId} = useIsLoggedIn()
+
+  useEffect(() => {
+    !loggedin ? router.push({
+                pathname: '/login',
+                query: { message: "Login or signup to access bank transactions for free!"}
+                }) : ''
+  }, [])
 
   const updateAccount = (id) => {
     if(account !== id && activeButton !== id) {

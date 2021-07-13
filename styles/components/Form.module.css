@@ -1,6 +1,19 @@
 .formContainer {
-    margin-top: 20vh;
-    
+    margin-top: 10vh;
+}
+
+.formHeader {
+    font-size: 4.3vw;
+    color: #32325d;
+}
+
+.formSubheader {
+    color: #32325d;
+    font-size: 2vw;
+
+    line-height: 2vw;
+
+    margin-bottom: 3.5vh;
 }
 
 .inputContainer {
@@ -37,6 +50,10 @@
     justify-self: flex-end;
 }
 
+.input::placeholder {
+    color: #dfdfdfde;
+}
+
 .input:focus {
     background-color: transparent;
     border: 0 solid transparent;
@@ -47,6 +64,7 @@
     background-color: #f6a4eb;
     color: #ffffff;
 
+    /* font-size: 1.6vw; */
     font-weight: 600;
 
     width: 100%;
@@ -57,4 +75,20 @@
 
 .button:hover {
     background-color: #f397e7;
+}
+
+.formLinksContainer {
+    margin-top: 1.5vh;
+}
+
+.formLinksContainer {
+    color: #c0ecfe;
+}
+
+.formLinksContainer a:first-of-type {
+    margin-right: 1vw;
+}
+
+.formLinksContainer a:hover {
+    color: #9f1ac0;
 }

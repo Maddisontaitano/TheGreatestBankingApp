@@ -1,5 +1,6 @@
 import styles from '../../styles/components/Form.module.css'
 
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import Router from 'next/router'
 import Button from '../global/Button'
@@ -46,6 +47,8 @@ export default function EntryForm() {
 
   return (
     <form className={styles.formContainer} onSubmit={submitHandler}>
+      <h1 className={styles.formHeader}>Welcome to ArkBank</h1>
+      <h2 className={styles.formSubheader}>The #1 most user friendly personal finance management system</h2>
       <div className={styles.inputContainer}>
         <label htmlFor="fname">
           <h3 className={styles.label}>First</h3>
@@ -100,8 +103,13 @@ export default function EntryForm() {
         />
       </div> */}
       <Button disabled={submitting} type="submit">
-        {submitting ? 'Creating ...' : 'Create'}
+        {submitting ? 'Singing Up ...' : 'Sign up'}
       </Button>
+      <div className={styles.formLinksContainer}>
+        <Link href='/login' style={{cursor: 'pointer'}}>
+          Already have an account? Sign In
+        </Link>
+      </div>
     </form>
   )
 }

@@ -19,12 +19,8 @@ export default function IndexPage() {
   const {loggedin, userId} = useIsLoggedIn();
   
   return (
-    <div>
+    <div className="no-overflow-y">
       <SectionA />
-      <SectionB />
-      <SectionC />
-      <SectionD />
-      <SectionE />
     </div>
   )
 }

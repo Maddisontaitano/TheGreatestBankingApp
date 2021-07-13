@@ -53,14 +53,17 @@ const Nav = () => {
             <ul>
                 {/* <img src='https://i.ibb.co/xszpynb/favicon.png' alt='bank'></img> */}
                 {/* <img src='https://i.ibb.co/LZdfPsd/account.png' alt='user'></img> */}
-                <li className={navStyles.title}><h2>Ark</h2></li>
-                <li><Link href='/'>Home</Link></li>
+                {!loggedin ? <li className={navStyles.title}><Link href='/'>Ark</Link></li> : <></>}
+                {loggedin ? <li className={navStyles.title}><Link href='/transactions'>Ark</Link></li> : <></>}
+                {/* {<li className={navStyles.title}><Link href='/'>Ark</Link></li>} */}
+                {/* <li><Link href='/'>Home</Link></li> */}
                 <li><Link href='/transactions'>Transactions</Link></li>
                 <li><Link href='/reports'>Reports</Link></li>
                 <li><Link href='/integrations'>Integrations</Link></li>
                 <li><Link href='/accounts'>Accounts</Link></li>
-                <li className={navStyles.user} onMouseEnter={showDropdown} onMouseLeave={hideDropdown} >
-                    <Link href='#' className={navStyles.signIn}>Sign in ></Link>
+                <li className={navStyles.user} onMouseLeave={hideDropdown} >
+                    {!loggedin ? <Link href='/login' className={navStyles.signIn}>Sign in ></Link> : <></>}
+                    {loggedin ? <li onClick={() => logUserOut()} style={{cursor: 'pointer'}} href='/login' className={navStyles.signIn}>Sign out</li> : <></>}
                     <div className={navStyles.connector}></div>
                     <div className={navStyles.dropdown} ref={dropdown} style={{visibility: dropdownVisibility}} >
                         <ul>

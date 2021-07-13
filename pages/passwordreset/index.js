@@ -1,7 +1,8 @@
 import { json } from 'body-parser';
 import React, {useState, useEffect} from 'react';
 import Router from 'next/router'
-import Button from '../../components/Button';
+import styles from '../../styles/components/Form.module.css'
+import Button from '../../components/global/Button';
 const forgotPassword = () => {
     const [email, setemail] = useState('');
     const [errorMessage, seterrorMessage] = useState('');
@@ -26,13 +27,17 @@ const forgotPassword = () => {
         }
       }
     return (
-        <div>
+        <div className={`${styles.formContainer} width60`}>
             <br />
             <h1>Forgot Password</h1>
             <br />
             <h3>Password reset link will be sent to your email</h3>
-            <input className="shadow border rounded w-full" type="email" placeholder="Enter Email" value={email} onChange={(val) => setemail(val.target.value)} />
-            <br /><br />
+            <div className={styles.inputContainer}>
+                <label htmlFor="email">
+                    <h3 className={styles.label}>Email</h3>
+                </label>
+                <input className={styles.input} type="email" value={email} onChange={(val) => setemail(val.target.value)} />
+            </div>
             <Button onClick={() => forgotPasswordHandler()}>Send reset link</Button>
         </div>
     )
