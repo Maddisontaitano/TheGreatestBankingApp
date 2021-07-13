@@ -14,6 +14,7 @@ export default function EntryForm() {
   const [lname, setLname] = useState('')
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
+  const [loginSucces, setloginSucces] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
   async function submitHandler(e) {
@@ -36,10 +37,38 @@ export default function EntryForm() {
         }),
       })
       setSubmitting(false)
-      const json = await res.json()
-      if (!res.ok) throw Error(json.message);
-      console.log(json)
-      Router.push('/login')
+      // const json = await res.json()
+      // if (!res.ok) throw Error(json.message);
+      // console.log(json)
+      const response = await fetch('/api/users/login-users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          pass
+        }),
+      })
+      setSubmitting(false)
+      const data = await response.json()
+      if (!response.ok) throw Error(data.message)
+
+      // SETTING THE EXPIRY DATE OF THE COOKIE
+      const timestamp = new Date().getTime(); // current time
+      const expiryDate = timestamp + (60 * 60 * 24 * 1000 * 7)
+      // SETTING THE EXPIRY DATE OF THE COOKIE
+
+      if (data.success) {
+        setloginSucces("Succesfully Logged In")//Setting a succes message is login was succesfull
+        document.cookie = `user=${data.userId}; ${expiryDate}; path=/;`;
+        Router.push({
+          pathname: `/integrations`,
+          query: { message: "You've successfully logged in, welcome to ArkBank"}
+        })
+      } else {
+        setloginSucces("Wrong Username / Password");//Setting a succes message is login was succesfull
+      }
     } catch (e) {
       throw Error(e.message)
     }

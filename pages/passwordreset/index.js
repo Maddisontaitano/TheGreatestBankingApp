@@ -27,9 +27,9 @@ const forgotPassword = () => {
         }
       }
     return (
-        <div className={`${styles.formContainer} width60`}>
+        <div className={`${styles.formContainer} updatePassword width60`}>
             <br />
-            <h1>Forgot Password</h1>
+            <h1>Forgot Password?</h1>
             <br />
             <h3>Password reset link will be sent to your email</h3>
             <div className={styles.inputContainer}>

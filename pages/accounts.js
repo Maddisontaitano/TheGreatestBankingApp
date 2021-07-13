@@ -23,6 +23,7 @@ const accounts = () => {
     const [ loading, setLoading ] = useState(false)
     const [ isFormToggled, toggleForm ] = useState(false)
     const [ formData, setFormData ] = useState(null)
+    const [ loadMessage, setLoadMessage ] = useState("")
     const [accountList, setAccountList] = useState(accounts)
     useEffect(() => {
         if(mounted && formData !== null){
@@ -91,16 +92,16 @@ const accounts = () => {
 
     return (
         <div className={accountsStyles.main}>
-            {loading ? <div className={accountsStyles.loginMsg}><SkeletonTheme color="#a8c4fd" highlightColor="#cfddfc"><Skeleton height={50} width={200}/></SkeletonTheme></div> 
+            {loading ? <div className={accountsStyles.loginMsg}><h2 className="loadMessage">{loadMessage}</h2><SkeletonTheme color="#a8c4fd" highlightColor="#cfddfc"><Skeleton height={50} width={200}/></SkeletonTheme></div> 
             : 
-                isFormToggled ?  <AccountForm exit={() => {toggleForm(false); setFormData(null); reFetch();} } formData={formData}/>
+                isFormToggled ?  <AccountForm exit={() => {toggleForm(false); setFormData(null); reFetch(); setLoading(true); setLoadMessage("Updating Nickname")} } formData={formData}/>
                 : <>
                     {loggedin && accountList
                     ? <>
                         {accountList.length > 0 
                         ? <>
                             <Accounts accounts={accountList} editAccount={(nickname, accoundId) => editAccount(nickname, accoundId)}  />
-                            {accountList.length < 5 ? <div className={accountsStyles.add} ref={clickRef} onClick={() => addAccount()} >+</div> : null}
+                            {accountList.length < 5 ? <div className={accountsStyles.add} ref={clickRef} onClick={() => {addAccount(); setLoadMessage("Creating Account");}} >+</div> : null}
                         </>
                         : <div className={accountsStyles.loginMsg}>No accounts Available <div style={{cursor: 'pointer', color: 'blue', marginLeft: '24px'}} onClick={() => addAccount()} >Create Account</div></div>
                         }

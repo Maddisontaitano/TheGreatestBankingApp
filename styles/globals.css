@@ -191,6 +191,22 @@ body {
   height: 10vw;
 }
 
+.updatePassword h1 {
+  font-size: 2vw;
+  color: #32325d;
+  font-weight: 500;
+}
+
+.updatePassword h3 {
+  font-size: 1.2vw;
+}
+
+.loadMessage {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.5vw;
+}
+
 a {
   color: inherit;
   text-decoration: none;

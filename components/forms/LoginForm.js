@@ -62,7 +62,7 @@ export default function EntryForm() {
     <form className={styles.formContainer} onSubmit={submitHandler}>
       {message ? <FlashMessage type="error" message={message} /> : <></>}
       <h1 className={styles.formHeader}>Welcome to ArkBank</h1>
-      <h2 className={styles.formSubheader}>The #1 most user friendly personal finance management system</h2>
+      <h2 className={styles.formSubheader}>The #1 most user friendly personal finance management tool</h2>
       <div className={styles.inputContainer}>
         <label htmlFor="email">
           <h3 className={styles.label}>Email</h3>
