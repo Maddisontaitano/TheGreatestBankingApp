@@ -1,0 +1,18 @@
+.form{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+}
+
+.text{
+    
+}
+
+.label{}
+
+.submit{
+    margin: 1rem;
+}
+
+.cancel{}

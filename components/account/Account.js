@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { mutate } from 'swr'
 import { useAccountTransactions} from '@../../lib/swr-hooks'
 
-import Container from '../Container'
-import Transactions from '../transactions/Transactions'
-import ButtonLink from '../ButtonLink'
+import Container from '../global/Container'
+import Transactions from '../transaction/Transactions'
+import ButtonLink from '../global/ButtonLink'
 import Button from '../global/Button'
 
 function Account({ id, type, userId, balance, username }) {

@@ -16,13 +16,13 @@ export function useUsers() {
 }
 
 export function useAccounts(id: string) {
-  const { data, error } = useSWR(`/api/get-user-accounts?id=${id}`, fetcher)
-  console.log("**** Account Data ****")
-  console.log(data)
-  console.log("**** Account Data ****")
+  const { data, error } = useSWR(`/api/accounts/get-user-accounts?id=${id}`, fetcher)
+  // console.log("**** Account Data ****")
+  // console.log(data)
+  // console.log("**** Account Data ****")
 
   return {
-    data: data,
+    accounts: data,
     isLoad: !error && !data,
     isError: error,
   }
