@@ -6,7 +6,7 @@ import { useIsLoggedIn } from '@/lib/swr-hooks'
 const Nav = () => {
     const {loggedin, userId} = useIsLoggedIn()
     useEffect(() => {
-        console.log(loggedin)
+        console.log('Is user logged in: ' + loggedin)
     }, [])
 
     const [dropdownVisibility, changeDropdownVisibility] = useState('hidden')
